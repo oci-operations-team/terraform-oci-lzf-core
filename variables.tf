@@ -62,20 +62,20 @@ variable "enable_compartments_delete" {
 variable "network_configuration" {
   type = object({
     default_compartment_id   = string,
-    default_compartment_name = string,
+    default_compartment_key = string,
     default_defined_tags     = map(string),
     default_freeform_tags    = map(string),
 
 
     network_configuration_categories = map(object({
       category_compartment_id   = string,
-      category_compartment_name = string,
+      category_compartment_key = string,
       category_defined_tags     = map(string),
       category_freeform_tags    = map(string),
 
       vcns = map(object({
         compartment_id   = string,
-        compartment_name = string,
+        compartment_key = string,
         display_name     = string
         byoipv6cidr_details = map(object({
           byoipv6range_id = string
@@ -94,7 +94,7 @@ variable "network_configuration" {
 
         security_lists = map(object({
           compartment_id   = string,
-          compartment_name = string,
+          compartment_key = string,
           defined_tags     = map(string),
           freeform_tags    = map(string),
           display_name     = string,
@@ -128,7 +128,7 @@ variable "network_configuration" {
 
         route_tables = map(object({
           compartment_id   = string,
-          compartment_name = string,
+          compartment_key = string,
           defined_tags     = map(string),
           freeform_tags    = map(string),
           display_name     = string,
@@ -142,7 +142,7 @@ variable "network_configuration" {
 
         dhcp_options = map(object({
           compartment_id   = string,
-          compartment_name = string,
+          compartment_key = string,
           display_name     = string,
           defined_tags     = map(string),
           freeform_tags    = map(string),
@@ -158,7 +158,7 @@ variable "network_configuration" {
         subnets = map(object({
           cidr_block       = string,
           compartment_id   = string,
-          compartment_name = string,
+          compartment_key = string,
           #Optional
           availability_domain        = string,
           defined_tags               = map(string),
@@ -176,7 +176,7 @@ variable "network_configuration" {
 
         network_security_groups = map(object({
           compartment_id   = string,
-          compartment_name = string,
+          compartment_key = string,
           defined_tags     = map(string)
           freeform_tags    = map(string)
           ingress_rules = map(object({
@@ -210,7 +210,7 @@ variable "network_configuration" {
         vcn_specific_gateways = object({
           internet_gateways = map(object({
             compartment_id   = string,
-            compartment_name = string,
+            compartment_key = string,
             enabled          = bool,
             defined_tags     = map(string),
             display_name     = string,
@@ -220,7 +220,7 @@ variable "network_configuration" {
 
           nat_gateways = map(object({
             compartment_id   = string,
-            compartment_name = string,
+            compartment_key = string,
             block_traffic    = bool,
             defined_tags     = map(string),
             display_name     = string,
@@ -231,7 +231,7 @@ variable "network_configuration" {
 
           service_gateways = map(object({
             compartment_id   = string,
-            compartment_name = string,
+            compartment_key = string,
             defined_tags     = map(string),
             display_name     = string,
             freeform_tags    = map(string),
@@ -240,7 +240,7 @@ variable "network_configuration" {
 
           local_peering_gateways = map(object({
             compartment_id   = string,
-            compartment_name = string,
+            compartment_key = string,
             defined_tags     = map(string),
             display_name     = string,
             freeform_tags    = map(string),
@@ -257,7 +257,7 @@ variable "network_configuration" {
 
         security_lists = map(object({
           compartment_id   = string,
-          compartment_name = string,
+          compartment_key = string,
           defined_tags     = map(string),
           freeform_tags    = map(string),
           display_name     = string,
@@ -291,7 +291,7 @@ variable "network_configuration" {
 
         route_tables = map(object({
           compartment_id   = string,
-          compartment_name = string,
+          compartment_key = string,
           defined_tags     = map(string),
           freeform_tags    = map(string),
           display_name     = string,
@@ -306,7 +306,7 @@ variable "network_configuration" {
 
         dhcp_options = map(object({
           compartment_id   = string,
-          compartment_name = string,
+          compartment_key = string,
           display_name     = string,
           defined_tags     = map(string),
           freeform_tags    = map(string),
@@ -322,7 +322,7 @@ variable "network_configuration" {
         subnets = map(object({
           cidr_block       = string,
           compartment_id   = string,
-          compartment_name = string,
+          compartment_key = string,
           #Optional
           availability_domain        = string,
           defined_tags               = map(string),
@@ -343,7 +343,7 @@ variable "network_configuration" {
 
         network_security_groups = map(object({
           compartment_id   = string,
-          compartment_name = string,
+          compartment_key = string,
           defined_tags     = map(string)
           freeform_tags    = map(string)
           ingress_rules = map(object({
@@ -377,7 +377,7 @@ variable "network_configuration" {
         vcn_specific_gateways = object({
           internet_gateways = map(object({
             compartment_id   = string,
-            compartment_name = string,
+            compartment_key = string,
             enabled          = bool,
             defined_tags     = map(string),
             display_name     = string,
@@ -388,7 +388,7 @@ variable "network_configuration" {
 
           nat_gateways = map(object({
             compartment_id   = string,
-            compartment_name = string,
+            compartment_key = string,
             block_traffic    = bool,
             defined_tags     = map(string),
             display_name     = string,
@@ -400,7 +400,7 @@ variable "network_configuration" {
 
           service_gateways = map(object({
             compartment_id   = string,
-            compartment_name = string,
+            compartment_key = string,
             defined_tags     = map(string),
             display_name     = string,
             freeform_tags    = map(string),
@@ -410,7 +410,7 @@ variable "network_configuration" {
 
           local_peering_gateways = map(object({
             compartment_id   = string,
-            compartment_name = string,
+            compartment_key = string,
             defined_tags     = map(string),
             display_name     = string,
             freeform_tags    = map(string),
@@ -426,14 +426,14 @@ variable "network_configuration" {
 
         dynamic_routing_gateways = map(object({
           compartment_id   = string,
-          compartment_name = string,
+          compartment_key = string,
           defined_tags     = map(string),
           display_name     = string,
           freeform_tags    = map(string),
 
           remote_peering_connections = map(object({
             compartment_id   = string,
-            compartment_name = string,
+            compartment_key = string,
             defined_tags     = map(string),
             display_name     = string,
             freeform_tags    = map(string),
