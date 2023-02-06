@@ -1,8 +1,8 @@
 # Copyright (c) 2022 Oracle and/or its affiliates.
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
 
-output "compartments" {
-  value = merge(
+locals {
+  compartments = merge(
     module.cislz_compartments.level_1_compartments,
     module.cislz_compartments.level_2_compartments,
     module.cislz_compartments.level_3_compartments,
@@ -10,6 +10,10 @@ output "compartments" {
     module.cislz_compartments.level_5_compartments,
     module.cislz_compartments.level_6_compartments
   )
+}
+
+output "compartments" {
+  value = local.compartments
 }
 
 output "networking_configuration" {
@@ -35,3 +39,9 @@ output "networking_configuration" {
     module.terraform-oci-cis-landing-zone-network.provisioned_drg_route_distributions_statements
   )
 }
+
+/*
+output "input_locals" {
+  value = local.network_configuration
+}
+*/
