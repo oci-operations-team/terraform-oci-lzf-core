@@ -11,9 +11,19 @@ locals {
     module.cislz_compartments.level_6_compartments
   )
 }
-
+/*
 output "compartments" {
   value = local.compartments
+}
+
+output "groups" {
+  description = "The groups."
+  value       = module.cislz_groups.groups
+}
+
+output "memberships" {
+  description = "The memberships."
+  value       = module.cislz_groups.memberships
 }
 
 output "networking_configuration" {
@@ -38,6 +48,14 @@ output "networking_configuration" {
     module.terraform-oci-cis-landing-zone-network.provisioned_drg_route_distributions,
     module.terraform-oci-cis-landing-zone-network.provisioned_drg_route_distributions_statements
   )
+}
+*/
+output "cmp_name_to_cislz_tag_map" {
+  value = module.cislz_policies.map_of_compartments_tagged_with_cislz_tag_lookup_value
+}
+
+output "cmp_type_list" {
+  value = module.cislz_policies.list_of_compartments_types_tagged_with_cislz_tag_lookup_value
 }
 
 /*

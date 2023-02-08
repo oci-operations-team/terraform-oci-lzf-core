@@ -53,6 +53,43 @@ variable "compartments" {
   default = {}
 }
 
+variable "groups" {
+  description = "The groups."
+  type = map(object({
+    name          = string,
+    description   = string,
+    members       = list(string),
+    defined_tags  = map(string),
+    freeform_tags = map(string)
+  }))
+}
+
+variable "policies" {
+  type = object({
+    enable_compartment_level_template_policies = string,
+    cislz_tag_lookup_value                     = string,
+    enable_tenancy_level_template_policies     = string,
+    groups_with_tenancy_level_roles = list(object({
+      name  = string
+      roles = string
+    })),
+    custom_policies = map(object({
+      name           = string
+      description    = string
+      compartment_id = string
+      statements     = list(string)
+      defined_tags   = map(string)
+      freeform_tags  = map(string)
+    })),
+    enable_cis_benchmark_checks = bool,
+    defined_tags                = map(string),
+    freeform_tags               = map(string),
+    policy_name_prefix          = string,
+    enable_output               = bool,
+    enable_debug                = bool
+  })
+}
+
 variable "enable_compartments_delete" {
   description = "Whether compartments are physically deleted upon destroy."
   type        = bool
