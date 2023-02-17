@@ -271,6 +271,6 @@ locals {
 }
 
 module "terraform-oci-cis-landing-zone-network" {
-  source                = "git@github.com:oci-operations-team/terraform-oci-networking.git?ref=v0.1.7"
+  source                = "git@github.com:oci-operations-team/terraform-oci-cis-landing-zone-network.git?ref=v0.1.7"
   network_configuration = local.network_configuration
 }
