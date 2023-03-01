@@ -131,6 +131,7 @@ locals {
         } : {} : {}
         inject_into_existing_vcns = netconfig_value.inject_into_existing_vcns != null ? length(netconfig_value.inject_into_existing_vcns) > 0 ? {
           for vcn_key, vcn_value in netconfig_value.inject_into_existing_vcns : vcn_key => {
+            vcn_id = vcn_value.vcn_id
             security_lists = vcn_value.security_lists != null ? length(vcn_value.security_lists) > 0 ? {
               for seclist_key, seclist_value in vcn_value.security_lists : seclist_key => {
                 compartment_id = seclist_value.compartment_id != null ? seclist_value.compartment_id : seclist_value.compartment_key != null ? local.compartments[seclist_value.compartment_key].id : null
@@ -191,7 +192,7 @@ locals {
                 egress_rules   = nsg_value.egress_rules
               }
             } : {} : {}
-            vcn_specific_gateways = {
+            vcn_specific_gateways = vcn_value.vcn_specific_gateways != null ? {
               internet_gateways = vcn_value.vcn_specific_gateways.internet_gateways != null ? length(vcn_value.vcn_specific_gateways.internet_gateways) > 0 ? {
                 for ig_key, ig_value in vcn_value.vcn_specific_gateways.internet_gateways : ig_key => {
                   compartment_id   = ig_value.compartment_id != null ? ig_value.compartment_id : ig_value.compartment_key != null ? local.compartments[ig_value.compartment_key].id : null
@@ -238,10 +239,10 @@ locals {
                   route_table_id   = lpg_value.route_table_id
                 }
               } : {} : {}
-            }
+            } : null
           }
         } : {} : {}
-        non_vcn_specific_gateways = {
+        non_vcn_specific_gateways = netconfig_value.non_vcn_specific_gateways != null ? {
           dynamic_routing_gateways = netconfig_value.non_vcn_specific_gateways.dynamic_routing_gateways != null ? length(netconfig_value.non_vcn_specific_gateways.dynamic_routing_gateways) > 0 ? {
             for drg_key, drg_value in netconfig_value.non_vcn_specific_gateways.dynamic_routing_gateways : drg_key => {
               compartment_id = drg_value.compartment_id != null ? drg_value.compartment_id : drg_value.compartment_key != null ? local.compartments[drg_value.compartment_key].id : null
@@ -264,7 +265,7 @@ locals {
               drg_route_distributions = drg_value.drg_route_distributions
             }
           } : {} : {}
-        }
+        } : null
       }
     } : null : null
   }
