@@ -25,31 +25,12 @@ output "memberships" {
   description = "The memberships."
   value       = module.cislz_groups.memberships
 }
-
-output "networking_configuration" {
-  value = merge(
-    module.terraform-oci-cis-landing-zone-network.provisioned_vcns,
-    module.terraform-oci-cis-landing-zone-network.provisioned_subnets,
-    module.terraform-oci-cis-landing-zone-network.provisioned_security_lists,
-    module.terraform-oci-cis-landing-zone-network.provisioned_network_security_groups,
-    module.terraform-oci-cis-landing-zone-network.provisioned_network_security_groups_ingress_rules,
-    module.terraform-oci-cis-landing-zone-network.provisioned_network_security_groups_egress_rules,
-    module.terraform-oci-cis-landing-zone-network.provisioned_route_tables_attachments,
-    module.terraform-oci-cis-landing-zone-network.provisioned_route_tables,
-    module.terraform-oci-cis-landing-zone-network.provisioned_dhcp_options,
-    module.terraform-oci-cis-landing-zone-network.provisioned_internet_gateways,
-    module.terraform-oci-cis-landing-zone-network.provisioned_nat_gateways,
-    module.terraform-oci-cis-landing-zone-network.provisioned_service_gateways,
-    module.terraform-oci-cis-landing-zone-network.provisioned_local_peering_gateways,
-    module.terraform-oci-cis-landing-zone-network.provisioned_dynamic_gateways,
-    module.terraform-oci-cis-landing-zone-network.provisioned_remote_peering_connections,
-    module.terraform-oci-cis-landing-zone-network.provisioned_drg_attachments,
-    module.terraform-oci-cis-landing-zone-network.provisioned_drg_route_tables,
-    module.terraform-oci-cis-landing-zone-network.provisioned_drg_route_distributions,
-    module.terraform-oci-cis-landing-zone-network.provisioned_drg_route_distributions_statements
-  )
-}
 */
+output "provisioned_networking_resources" {
+  description = "Provisioned networking resources"
+  value       = module.terraform-oci-cis-landing-zone-network.provisioned_networking_resources
+}
+
 output "cmp_name_to_cislz_tag_map" {
   value = module.cislz_policies.map_of_compartments_tagged_with_cislz_tag_lookup_value
 }

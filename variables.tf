@@ -1,8 +1,8 @@
 # Copyright (c) 2022 Oracle and/or its affiliates.
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
 
-variable "tenancy_id" {}
-variable "user_id" {}
+variable "tenancy_ocid" {}
+variable "user_ocid" {}
 variable "fingerprint" {}
 variable "private_key_path" {}
 variable "private_key_password" {}
@@ -98,427 +98,577 @@ variable "enable_compartments_delete" {
 
 variable "network_configuration" {
   type = object({
-    default_compartment_id  = string,
-    default_compartment_key = string,
-    default_defined_tags    = map(string),
-    default_freeform_tags   = map(string),
+    default_compartment_id     = optional(string),
+    default_compartment_key    = string,
+    default_defined_tags       = optional(map(string)),
+    default_freeform_tags      = optional(map(string)),
+    default_enable_cis_checks  = optional(bool),
+    default_ssh_ports_to_check = optional(list(number)),
 
+    network_configuration_categories = optional(map(object({
+      category_compartment_id     = optional(string),
+      category_compartment_key    = optional(string),
+      category_defined_tags       = optional(map(string)),
+      category_freeform_tags      = optional(map(string)),
+      category_enable_cis_checks  = optional(bool),
+      category_ssh_ports_to_check = optional(list(number)),
 
-    network_configuration_categories = map(object({
-      category_compartment_id  = string,
-      category_compartment_key = string,
-      category_defined_tags    = map(string),
-      category_freeform_tags   = map(string),
-
-      vcns = map(object({
-        compartment_id  = string,
-        compartment_key = string,
-        display_name    = string
-        byoipv6cidr_details = map(object({
+      vcns = optional(map(object({
+        compartment_id  = optional(string),
+        compartment_key = optional(string),
+        display_name    = optional(string),
+        byoipv6cidr_details = optional(map(object({
           byoipv6range_id = string
           ipv6cidr_block  = string
-        }))
-        ipv6private_cidr_blocks          = list(string),
-        is_ipv6enabled                   = bool,
-        is_oracle_gua_allocation_enabled = bool,
-        cidr_blocks                      = list(string),
-        dns_label                        = string,
-        is_create_igw                    = bool,
-        is_attach_drg                    = bool,
-        block_nat_traffic                = bool,
-        defined_tags                     = map(string),
-        freeform_tags                    = map(string),
+        })))
+        ipv6private_cidr_blocks          = optional(list(string)),
+        is_ipv6enabled                   = optional(bool),
+        is_oracle_gua_allocation_enabled = optional(bool),
+        cidr_blocks                      = optional(list(string)),
+        dns_label                        = optional(string),
+        is_create_igw                    = optional(bool),
+        is_attach_drg                    = optional(bool),
+        block_nat_traffic                = optional(bool),
+        defined_tags                     = optional(map(string)),
+        freeform_tags                    = optional(map(string)),
 
-        security_lists = map(object({
-          compartment_id  = string,
-          compartment_key = string,
-          defined_tags    = map(string),
-          freeform_tags   = map(string),
-          display_name    = string,
-          ingress_rules = list(object({
-            stateless    = bool,
+        security_lists = optional(map(object({
+          compartment_id  = optional(string),
+          compartment_key = optional(string),
+          defined_tags    = optional(map(string)),
+          freeform_tags   = optional(map(string)),
+          display_name    = optional(string),
+          ingress_rules = optional(list(object({
+            stateless    = optional(bool),
             protocol     = string,
-            description  = string,
+            description  = optional(string),
             src          = string,
             src_type     = string,
-            src_port_min = number,
-            src_port_max = number,
-            dst_port_min = number,
-            dst_port_max = number,
-            icmp_type    = number,
-            icmp_code    = number
-          })),
-          egress_rules = list(object({
-            stateless    = bool,
+            src_port_min = optional(number),
+            src_port_max = optional(number),
+            dst_port_min = optional(number),
+            dst_port_max = optional(number),
+            icmp_type    = optional(number),
+            icmp_code    = optional(number)
+          }))),
+          egress_rules = optional(list(object({
+            stateless    = optional(bool),
             protocol     = string,
-            description  = string,
+            description  = optional(string),
             dst          = string,
             dst_type     = string,
-            src_port_min = number,
-            src_port_max = number,
-            dst_port_min = number,
-            dst_port_max = number,
-            icmp_type    = number,
-            icmp_code    = number
-          }))
-        }))
+            src_port_min = optional(number),
+            src_port_max = optional(number),
+            dst_port_min = optional(number),
+            dst_port_max = optional(number),
+            icmp_type    = optional(number),
+            icmp_code    = optional(number)
+          })))
+        })))
 
-        route_tables = map(object({
-          compartment_id  = string,
-          compartment_key = string,
-          defined_tags    = map(string),
-          freeform_tags   = map(string),
-          display_name    = string,
-          route_rules = map(object({
-            network_entity_name = string,
-            description         = string,
-            destination         = string,
-            destination_type    = string
-          }))
-        }))
+        route_tables = optional(map(object({
+          compartment_id  = optional(string),
+          compartment_key = optional(string),
+          defined_tags    = optional(map(string)),
+          freeform_tags   = optional(map(string)),
+          display_name    = optional(string),
+          route_rules = optional(map(object({
+            network_entity_id  = optional(string),
+            network_entity_key = optional(string),
+            description        = optional(string),
+            destination        = optional(string),
+            destination_type   = optional(string)
+          })))
+        })))
 
-        dhcp_options = map(object({
-          compartment_id   = string,
-          compartment_key  = string,
-          display_name     = string,
-          defined_tags     = map(string),
-          freeform_tags    = map(string),
-          domain_name_type = string,
+        dhcp_options = optional(map(object({
+          compartment_id   = optional(string),
+          compartment_key  = optional(string),
+          display_name     = optional(string),
+          defined_tags     = optional(map(string)),
+          freeform_tags    = optional(map(string)),
+          domain_name_type = optional(string),
           options = map(object({
             type                = string,
-            server_type         = string,
-            custom_dns_servers  = list(string)
-            search_domain_names = list(string)
+            server_type         = optional(string),
+            custom_dns_servers  = optional(list(string))
+            search_domain_names = optional(list(string))
           }))
-        }))
+        })))
 
-        subnets = map(object({
+        subnets = optional(map(object({
           cidr_block      = string,
-          compartment_id  = string,
-          compartment_key = string,
+          compartment_id  = optional(string),
+          compartment_key = optional(string),
           #Optional
-          availability_domain        = string,
-          defined_tags               = map(string),
-          dhcp_options_name          = string,
-          display_name               = string,
-          dns_label                  = string,
-          freeform_tags              = map(string),
-          ipv6cidr_block             = string,
-          ipv6cidr_blocks            = list(string),
-          prohibit_internet_ingress  = bool,
-          prohibit_public_ip_on_vnic = bool,
-          route_table_name           = string,
-          security_list_names        = list(string)
-        }))
+          availability_domain        = optional(string),
+          defined_tags               = optional(map(string)),
+          dhcp_options_key           = optional(string),
+          display_name               = optional(string),
+          dns_label                  = optional(string),
+          freeform_tags              = optional(map(string)),
+          ipv6cidr_block             = optional(string),
+          ipv6cidr_blocks            = optional(list(string)),
+          prohibit_internet_ingress  = optional(bool),
+          prohibit_public_ip_on_vnic = optional(bool),
+          route_table_key            = optional(string),
+          security_list_keys         = optional(list(string))
+        })))
 
-        network_security_groups = map(object({
-          compartment_id  = string,
-          compartment_key = string,
-          defined_tags    = map(string)
-          freeform_tags   = map(string)
-          ingress_rules = map(object({
-            description  = string,
+        network_security_groups = optional(map(object({
+          compartment_id  = optional(string),
+          compartment_key = optional(string),
+          display_name    = optional(string),
+          defined_tags    = optional(map(string))
+          freeform_tags   = optional(map(string))
+          ingress_rules = optional(map(object({
+            description  = optional(string),
             protocol     = string,
-            stateless    = bool,
-            src          = string,
-            src_type     = string,
+            stateless    = optional(bool),
+            src          = optional(string),
+            src_type     = optional(string),
             dst_port_min = number,
             dst_port_max = number,
-            src_port_min = number,
-            src_port_max = number,
-            icmp_type    = number,
-            icmp_code    = number
-          })),
-          egress_rules = map(object({
-            description  = string,
+            src_port_min = optional(number),
+            src_port_max = optional(number),
+            icmp_type    = optional(number),
+            icmp_code    = optional(number)
+          }))),
+          egress_rules = optional(map(object({
+            description  = optional(string),
             protocol     = string,
-            stateless    = bool,
-            dst          = string,
-            dst_type     = string,
-            dst_port_min = number,
-            dst_port_max = number,
-            src_port_min = number,
-            src_port_max = number,
-            icmp_type    = number,
-            icmp_code    = number
-          }))
+            stateless    = optional(bool),
+            dst          = optional(string),
+            dst_type     = optional(string),
+            dst_port_min = optional(number),
+            dst_port_max = optional(number),
+            src_port_min = optional(number),
+            src_port_max = optional(number),
+            icmp_type    = optional(number),
+            icmp_code    = optional(number)
+          })))
+        })))
+
+        vcn_specific_gateways = optional(object({
+          internet_gateways = optional(map(object({
+            compartment_id  = optional(string),
+            compartment_key = optional(string),
+            enabled         = optional(bool),
+            defined_tags    = optional(map(string)),
+            display_name    = optional(string),
+            freeform_tags   = optional(map(string)),
+            route_table_key = optional(string)
+          })))
+
+          nat_gateways = optional(map(object({
+            compartment_id  = optional(string),
+            compartment_key = optional(string),
+            block_traffic   = optional(bool),
+            defined_tags    = optional(map(string)),
+            display_name    = optional(string),
+            freeform_tags   = optional(map(string)),
+            public_ip_id    = optional(string),
+            route_table_key = optional(string)
+          })))
+
+          service_gateways = optional(map(object({
+            compartment_id  = optional(string),
+            compartment_key = optional(string),
+            defined_tags    = optional(map(string)),
+            display_name    = optional(string),
+            freeform_tags   = optional(map(string)),
+            route_table_key = optional(string)
+          })))
+
+          local_peering_gateways = optional(map(object({
+            compartment_id  = optional(string),
+            compartment_key = optional(string),
+            defined_tags    = optional(map(string)),
+            display_name    = optional(string),
+            freeform_tags   = optional(map(string)),
+            peer_id         = optional(string),
+            peer_key        = optional(string),
+            route_table_key = optional(string)
+          })))
         }))
+      })))
 
-        vcn_specific_gateways = object({
-          internet_gateways = map(object({
-            compartment_id   = string,
-            compartment_key  = string,
-            enabled          = bool,
-            defined_tags     = map(string),
-            display_name     = string,
-            freeform_tags    = map(string),
-            route_table_name = string
-          }))
-
-          nat_gateways = map(object({
-            compartment_id   = string,
-            compartment_key  = string,
-            block_traffic    = bool,
-            defined_tags     = map(string),
-            display_name     = string,
-            freeform_tags    = map(string),
-            public_ip_id     = string,
-            route_table_name = string
-          }))
-
-          service_gateways = map(object({
-            compartment_id   = string,
-            compartment_key  = string,
-            defined_tags     = map(string),
-            display_name     = string,
-            freeform_tags    = map(string),
-            route_table_name = string
-          }))
-
-          local_peering_gateways = map(object({
-            compartment_id   = string,
-            compartment_key  = string,
-            defined_tags     = map(string),
-            display_name     = string,
-            freeform_tags    = map(string),
-            peer_id          = string,
-            peer_name        = string,
-            route_table_name = string
-          }))
-        })
-      }))
-
-      inject_into_existing_vcns = map(object({
+      inject_into_existing_vcns = optional(map(object({
 
         vcn_id = string,
 
-        security_lists = map(object({
-          compartment_id  = string,
-          compartment_key = string,
-          defined_tags    = map(string),
-          freeform_tags   = map(string),
-          display_name    = string,
-          ingress_rules = list(object({
-            stateless    = bool,
+        security_lists = optional(map(object({
+          compartment_id  = optional(string),
+          compartment_key = optional(string),
+          defined_tags    = optional(map(string)),
+          freeform_tags   = optional(map(string)),
+          display_name    = optional(string),
+          ingress_rules = optional(list(object({
+            stateless    = optional(bool),
             protocol     = string,
-            description  = string,
+            description  = optional(string),
             src          = string,
             src_type     = string,
-            src_port_min = number,
-            src_port_max = number,
-            dst_port_min = number,
-            dst_port_max = number,
-            icmp_type    = number,
-            icmp_code    = number
-          })),
-          egress_rules = list(object({
-            stateless    = bool,
+            src_port_min = optional(number),
+            src_port_max = optional(number),
+            dst_port_min = optional(number),
+            dst_port_max = optional(number),
+            icmp_type    = optional(number),
+            icmp_code    = optional(number)
+          }))),
+          egress_rules = optional(list(object({
+            stateless    = optional(bool),
             protocol     = string,
-            description  = string,
+            description  = optional(string),
             dst          = string,
             dst_type     = string,
-            src_port_min = number,
-            src_port_max = number,
-            dst_port_min = number,
-            dst_port_max = number,
-            icmp_type    = number,
-            icmp_code    = number
-          }))
-        }))
+            src_port_min = optional(number),
+            src_port_max = optional(number),
+            dst_port_min = optional(number),
+            dst_port_max = optional(number),
+            icmp_type    = optional(number),
+            icmp_code    = optional(number)
+          })))
+        })))
 
-        route_tables = map(object({
-          compartment_id  = string,
-          compartment_key = string,
-          defined_tags    = map(string),
-          freeform_tags   = map(string),
-          display_name    = string,
-          route_rules = map(object({
-            network_entity_id   = string,
-            network_entity_name = string,
-            description         = string,
-            destination         = string,
-            destination_type    = string
-          }))
-        }))
+        route_tables = optional(map(object({
+          compartment_id  = optional(string),
+          compartment_key = optional(string),
+          defined_tags    = optional(map(string)),
+          freeform_tags   = optional(map(string)),
+          display_name    = optional(string),
+          route_rules = optional(map(object({
+            network_entity_id  = optional(string),
+            network_entity_key = optional(string),
+            description        = optional(string),
+            destination_type   = optional(string)
+          })))
+        })))
 
-        dhcp_options = map(object({
-          compartment_id   = string,
+        dhcp_options = optional(map(object({
+          compartment_id   = optional(string),
           compartment_key  = string,
-          display_name     = string,
-          defined_tags     = map(string),
-          freeform_tags    = map(string),
-          domain_name_type = string,
+          display_name     = optional(string),
+          defined_tags     = optional(map(string)),
+          freeform_tags    = optional(map(string)),
+          domain_name_type = optional(string),
           options = map(object({
             type                = string,
-            server_type         = string,
-            custom_dns_servers  = list(string)
-            search_domain_names = list(string)
+            server_type         = optional(string),
+            custom_dns_servers  = optional(list(string))
+            search_domain_names = optional(list(string))
           }))
-        }))
+        })))
 
-        subnets = map(object({
+        subnets = optional(map(object({
           cidr_block      = string,
-          compartment_id  = string,
-          compartment_key = string,
+          compartment_id  = optional(string),
+          compartment_key = optional(string),
           #Optional
-          availability_domain        = string,
-          defined_tags               = map(string),
-          dhcp_options_id            = string,
-          dhcp_options_name          = string,
-          display_name               = string,
-          dns_label                  = string,
-          freeform_tags              = map(string),
-          ipv6cidr_block             = string,
-          ipv6cidr_blocks            = list(string),
-          prohibit_internet_ingress  = bool,
-          prohibit_public_ip_on_vnic = bool,
-          route_table_id             = string,
-          route_table_name           = string,
-          security_list_ids          = list(string),
-          security_list_names        = list(string)
-        }))
+          availability_domain        = optional(string),
+          defined_tags               = optional(map(string)),
+          dhcp_options_id            = optional(string),
+          dhcp_options_key           = optional(string),
+          display_name               = optional(string),
+          dns_label                  = optional(string),
+          freeform_tags              = optional(map(string)),
+          ipv6cidr_block             = optional(string),
+          ipv6cidr_blocks            = optional(list(string)),
+          prohibit_internet_ingress  = optional(bool),
+          prohibit_public_ip_on_vnic = optional(bool),
+          route_table_id             = optional(string),
+          route_table_key            = optional(string),
+          security_list_ids          = optional(list(string)),
+          security_list_keys         = optional(list(string))
+        })))
 
-        network_security_groups = map(object({
-          compartment_id  = string,
-          compartment_key = string,
-          defined_tags    = map(string)
-          freeform_tags   = map(string)
-          ingress_rules = map(object({
-            description  = string,
+        network_security_groups = optional(map(object({
+          compartment_id  = optional(string),
+          compartment_key = optional(string),
+          display_name    = optional(string),
+          defined_tags    = optional(map(string))
+          freeform_tags   = optional(map(string))
+          ingress_rules = optional(map(object({
+            description  = optional(string),
             protocol     = string,
-            stateless    = bool,
-            src          = string,
-            src_type     = string,
+            stateless    = optional(bool),
+            src          = optional(string),
+            src_type     = optional(string),
             dst_port_min = number,
             dst_port_max = number,
-            src_port_min = number,
-            src_port_max = number,
-            icmp_type    = number,
-            icmp_code    = number
-          })),
-          egress_rules = map(object({
-            description  = string,
+            src_port_min = optional(number),
+            src_port_max = optional(number),
+            icmp_type    = optional(number),
+            icmp_code    = optional(number)
+          }))),
+          egress_rules = optional(map(object({
+            description  = optional(string),
             protocol     = string,
-            stateless    = bool,
-            dst          = string,
-            dst_type     = string,
-            dst_port_min = number,
-            dst_port_max = number,
-            src_port_min = number,
-            src_port_max = number,
-            icmp_type    = number,
-            icmp_code    = number
-          }))
+            stateless    = optional(bool),
+            dst          = optional(string),
+            dst_type     = optional(string),
+            dst_port_min = optional(number),
+            dst_port_max = optional(number),
+            src_port_min = optional(number),
+            src_port_max = optional(number),
+            icmp_type    = optional(number),
+            icmp_code    = optional(number)
+          })))
+        })))
+
+        vcn_specific_gateways = optional(object({
+          internet_gateways = optional(map(object({
+            compartment_id  = optional(string),
+            compartment_key = optional(string),
+            enabled         = optional(bool),
+            defined_tags    = optional(map(string)),
+            display_name    = optional(string),
+            freeform_tags   = optional(map(string)),
+            route_table_id  = optional(string),
+            route_table_key = optional(string)
+          })))
+
+          nat_gateways = optional(map(object({
+            compartment_id  = optional(string),
+            compartment_key = optional(string),
+            block_traffic   = optional(bool),
+            defined_tags    = optional(map(string)),
+            display_name    = optional(string),
+            freeform_tags   = optional(map(string)),
+            public_ip_id    = optional(string),
+            route_table_id  = optional(string),
+            route_table_key = optional(string)
+          })))
+
+          service_gateways = optional(map(object({
+            compartment_id  = optional(string),
+            compartment_key = optional(string),
+            defined_tags    = optional(map(string)),
+            display_name    = optional(string),
+            freeform_tags   = optional(map(string)),
+            route_table_id  = optional(string),
+            route_table_key = optional(string)
+          })))
+
+          local_peering_gateways = optional(map(object({
+            compartment_id  = optional(string),
+            compartment_key = optional(string),
+            defined_tags    = optional(map(string)),
+            display_name    = optional(string),
+            freeform_tags   = optional(map(string)),
+            peer_id         = optional(string),
+            peer_key        = optional(string),
+            route_table_id  = optional(string),
+            route_table_key = optional(string)
+          })))
         }))
+      })))
 
-        vcn_specific_gateways = object({
-          internet_gateways = map(object({
-            compartment_id   = string,
+      non_vcn_specific_gateways = optional(object({
+
+        dynamic_routing_gateways = optional(map(object({
+          compartment_id  = optional(string),
+          compartment_key = optional(string),
+          defined_tags    = optional(map(string)),
+          display_name    = optional(string),
+          freeform_tags   = optional(map(string)),
+
+          remote_peering_connections = optional(map(object({
+            compartment_id   = optional(string),
             compartment_key  = string,
-            enabled          = bool,
-            defined_tags     = map(string),
-            display_name     = string,
-            freeform_tags    = map(string),
-            route_table_id   = string,
-            route_table_name = string
-          }))
+            defined_tags     = optional(map(string)),
+            display_name     = optional(string),
+            freeform_tags    = optional(map(string)),
+            peer_id          = optional(string),
+            peer_key         = optional(string),
+            peer_region_name = optional(string)
+          })))
 
-          nat_gateways = map(object({
-            compartment_id   = string,
-            compartment_key  = string,
-            block_traffic    = bool,
-            defined_tags     = map(string),
-            display_name     = string,
-            freeform_tags    = map(string),
-            public_ip_id     = string,
-            route_table_id   = string,
-            route_table_name = string
-          }))
-
-          service_gateways = map(object({
-            compartment_id   = string,
-            compartment_key  = string,
-            defined_tags     = map(string),
-            display_name     = string,
-            freeform_tags    = map(string),
-            route_table_id   = string,
-            route_table_name = string
-          }))
-
-          local_peering_gateways = map(object({
-            compartment_id   = string,
-            compartment_key  = string,
-            defined_tags     = map(string),
-            display_name     = string,
-            freeform_tags    = map(string),
-            peer_id          = string,
-            peer_name        = string,
-            route_table_id   = string,
-            route_table_name = string
-          }))
-        })
-      }))
-
-      non_vcn_specific_gateways = object({
-
-        dynamic_routing_gateways = map(object({
-          compartment_id  = string,
-          compartment_key = string,
-          defined_tags    = map(string),
-          display_name    = string,
-          freeform_tags   = map(string),
-
-          remote_peering_connections = map(object({
-            compartment_id   = string,
-            compartment_key  = string,
-            defined_tags     = map(string),
-            display_name     = string,
-            freeform_tags    = map(string),
-            peer_id          = string,
-            peer_name        = string,
-            peer_region_name = string
-          }))
-
-          drg_attachments = map(object({
-            defined_tags         = map(string),
-            display_name         = string,
-            freeform_tags        = map(string),
-            drg_route_table_id   = string,
-            drg_route_table_name = string,
-            network_details = object({
-              attached_resource_id   = string,
-              attached_resource_name = string,
-              type                   = string,
-              route_table_id         = string,
-              route_table_name       = string,
-              vcn_route_type         = string
-            })
-          }))
-          drg_route_tables = map(object({
-            defined_tags                     = map(string),
-            display_name                     = string,
-            freeform_tags                    = map(string),
-            import_drg_route_distribution_id = string,
-            is_ecmp_enabled                  = bool
-          }))
-
-          drg_route_distributions = map(object({
-            distribution_type = string,
-            defined_tags      = map(string),
-            display_name      = string,
-            freeform_tags     = map(string),
-            statements = map(object({
-              action = string,
-              match_criteria = map(object({
-                match_type        = string,
-                attachment_type   = string,
-                drg_attachment_id = string,
-              }))
-              priority = number
+          drg_attachments = optional(map(object({
+            defined_tags        = optional(map(string)),
+            display_name        = optional(string),
+            freeform_tags       = optional(map(string)),
+            drg_route_table_id  = optional(string),
+            drg_route_table_key = optional(string),
+            network_details = optional(object({
+              attached_resource_id  = optional(string),
+              attached_resource_key = optional(string),
+              type                  = string,
+              route_table_id        = optional(string),
+              route_table_key       = optional(string),
+              vcn_route_type        = optional(string)
             }))
-          }))
+          })))
+
+          drg_route_tables = optional(map(object({
+            defined_tags                     = optional(map(string)),
+            display_name                     = optional(string),
+            freeform_tags                    = optional(map(string)),
+            import_drg_route_distribution_id = optional(string),
+            is_ecmp_enabled                  = optional(bool)
+          })))
+
+          drg_route_distributions = optional(map(object({
+            distribution_type = string,
+            defined_tags      = optional(map(string)),
+            display_name      = optional(string),
+            freeform_tags     = optional(map(string))
+            statements = optional(map(object({
+              action = string,
+              match_criteria = optional(map(object({
+                match_type        = string,
+                attachment_type   = optional(string),
+                drg_attachment_id = optional(string),
+              })))
+              priority = optional(number)
+            })))
+          })))
+        })))
+
+        inject_into_existing_drgs = optional(map(object({
+          drg_id = string,
+
+          remote_peering_connections = optional(map(object({
+            compartment_id   = optional(string),
+            compartment_key  = string,
+            defined_tags     = optional(map(string)),
+            display_name     = optional(string),
+            freeform_tags    = optional(map(string)),
+            peer_id          = optional(string),
+            peer_key         = optional(string),
+            peer_region_name = optional(string)
+          })))
+
+          drg_attachments = optional(map(object({
+            defined_tags        = optional(map(string)),
+            display_name        = optional(string),
+            freeform_tags       = optional(map(string)),
+            drg_route_table_id  = optional(string),
+            drg_route_table_key = optional(string),
+            network_details = optional(object({
+              attached_resource_id  = optional(string),
+              attached_resource_key = optional(string),
+              type                  = string,
+              route_table_id        = optional(string),
+              route_table_key       = optional(string),
+              vcn_route_type        = optional(string)
+            }))
+          })))
+
+          drg_route_tables = optional(map(object({
+            defined_tags                     = optional(map(string)),
+            display_name                     = optional(string),
+            freeform_tags                    = optional(map(string)),
+            import_drg_route_distribution_id = optional(string),
+            is_ecmp_enabled                  = optional(bool)
+          })))
+
+          drg_route_distributions = optional(map(object({
+            distribution_type = string,
+            defined_tags      = optional(map(string)),
+            display_name      = optional(string),
+            freeform_tags     = optional(map(string))
+            statements = optional(map(object({
+              action = string,
+              match_criteria = optional(map(object({
+                match_type        = string,
+                attachment_type   = optional(string),
+                drg_attachment_id = optional(string),
+              })))
+              priority = number
+            })))
+          })))
+        })))
+
+        network_firewalls_configuration = optional(object({
+          network_firewalls = optional(map(object({
+            availability_domain         = optional(number),
+            compartment_id              = optional(string),
+            compartment_key             = string,
+            defined_tags                = optional(map(string)),
+            display_name                = optional(string),
+            freeform_tags               = optional(map(string)),
+            ipv4address                 = optional(string),
+            ipv6address                 = optional(string),
+            network_security_group_ids  = optional(list(string)),
+            network_security_group_keys = optional(list(string)),
+            subnet_id                   = optional(string),
+            subnet_key                  = optional(string),
+            network_firewall_policy_id  = optional(string),
+            network_firewall_policy_key = optional(string)
+          }))),
+
+          network_firewall_policies = optional(map(object({
+            compartment_id  = optional(string),
+            compartment_key = optional(string),
+            defined_tags    = optional(map(string)),
+            display_name    = optional(string),
+            freeform_tags   = optional(map(string)),
+            application_lists = optional(map(object({
+              application_list_name = string,
+              application_values = map(object({
+                type         = string,
+                icmp_type    = optional(string),
+                icmp_code    = optional(string),
+                minimum_port = optional(number),
+                maximum_port = optional(number)
+              }))
+            })))
+            decryption_profiles = optional(map(object({
+              is_out_of_capacity_blocked            = bool,
+              is_unsupported_cipher_blocked         = bool,
+              is_unsupported_version_blocked        = bool,
+              type                                  = string,
+              key                                   = string,
+              are_certificate_extensions_restricted = optional(bool),
+              is_auto_include_alt_name              = optional(bool),
+              is_expired_certificate_blocked        = optional(bool),
+              is_revocation_status_timeout_blocked  = optional(bool),
+              is_unknown_revocation_status_blocked  = optional(bool),
+              is_untrusted_issuer_blocked           = optional(bool)
+            })))
+            decryption_rules = optional(map(object({
+              action             = string,
+              name               = string,
+              decryption_profile = optional(string),
+              secret             = optional(string),
+              conditions = map(object({
+                destinations = optional(list(string)),
+                sources      = optional(list(string))
+              }))
+            })))
+            ip_address_lists = optional(map(object({
+              ip_address_list_name  = string,
+              ip_address_list_value = list(string)
+            })))
+            mapped_secrets = optional(map(object({
+              key             = optional(string),
+              type            = string,
+              vault_secret_id = string,
+              version_number  = string,
+            })))
+            security_rules = optional(map(object({
+              action     = string,
+              inspection = optional(string),
+              name       = string
+              conditions = map(object({
+                applications = optional(list(string)),
+                destinations = optional(list(string)),
+                sources      = optional(list(string)),
+                urls         = optional(list(string))
+              }))
+            })))
+            url_lists = optional(map(object({
+              url_list_name = string,
+              url_list_values = map(object({
+                type    = string,
+                pattern = string
+              }))
+            })))
+          })))
         }))
-      })
-    }))
+      }))
+      }
+    )))
   })
 }

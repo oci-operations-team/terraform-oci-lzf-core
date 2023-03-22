@@ -32,13 +32,13 @@ module "cislz_compartments" {
 
 module "cislz_groups" {
   source     = "git@github.com:oci-operations-team/terraform-oci-cis-landing-zone-groups.git?ref=v0.0.1"
-  tenancy_id = var.tenancy_id
+  tenancy_id = var.tenancy_ocid
   groups     = var.groups
 }
 
 module "cislz_policies" {
   source                                     = "git@github.com:oci-operations-team/terraform-oci-cis-landing-zone-policies.git?ref=v0.0.1"
-  tenancy_id                                 = var.tenancy_id
+  tenancy_id                                 = var.tenancy_ocid
   enable_compartment_level_template_policies = local.policies.enable_compartment_level_template_policies
   target_compartments                        = local.policies.target_compartments
   cislz_tag_lookup_value                     = local.policies.cislz_tag_lookup_value
