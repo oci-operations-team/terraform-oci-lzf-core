@@ -27,18 +27,19 @@ locals {
 
 
 module "cislz_compartments" {
-  source                     = "git@github.com:oci-operations-team/terraform-oci-cis-landing-zone-iam.git//compartments?ref=v0.1.0"
+  source                     = "git@github.com:oracle-quickstart/terraform-oci-cis-landing-zone-iam.git//compartments?ref=v0.1.0"
+  tenancy_ocid               = var.tenancy_ocid
   compartments_configuration = var.compartments_configuration
 }
 
 module "cislz_groups" {
-  source     = "git@github.com:oci-operations-team/terraform-oci-cis-landing-zone-iam.git//groups?ref=v0.1.0"
-  tenancy_ocid = var.tenancy_ocid
-  groups     = var.groups
+  source               = "git@github.com:oracle-quickstart/terraform-oci-cis-landing-zone-iam.git//groups?ref=v0.1.0"
+  tenancy_ocid         = var.tenancy_ocid
+  groups_configuration = var.groups_configuration
 }
 
 module "cislz_policies" {
-  source                                     = "git@github.com:oci-operations-team/terraform-oci-cis-landing-zone-iam.git//policies?ref=v0.1.0"
-  tenancy_ocid = var.tenancy_ocid
+  source                 = "git@github.com:oracle-quickstart/terraform-oci-cis-landing-zone-iam.git//policies?ref=v0.1.0"
+  tenancy_ocid           = var.tenancy_ocid
   policies_configuration = var.policies_configuration
 }

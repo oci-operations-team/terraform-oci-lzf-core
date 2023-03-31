@@ -14,109 +14,113 @@ variable "home_region" {}
 variable "compartments_configuration" {
   description = "The compartments configuration. Use the compartments attribute to define your topology. OCI supports compartment hierarchies up to six levels."
   type = object({
-    default_parent_ocid = string # the default parent for all top (first level) compartments. Use parent_ocid attribute to specify different parents.
-    enable_delete = optional(bool) # whether or not compartments are physically deleted when destroyed. Default is false.
+    default_parent_ocid = string         # the default parent for all top (first level) compartments. Use parent_ocid attribute to specify different parents.
+    enable_delete       = optional(bool) # whether or not compartments are physically deleted when destroyed. Default is false.
     compartments = map(object({
       name          = string
       description   = string
       parent_ocid   = optional(string)
       defined_tags  = optional(map(string))
       freeform_tags = optional(map(string))
-      tag_defaults     = optional(map(object({
-        tag_ocid = string,
-        default_value = string,
+      tag_defaults = optional(map(object({
+        tag_ocid         = string,
+        default_value    = string,
         is_user_required = optional(bool)
       })))
-      children      = optional(map(object({
+      children = optional(map(object({
         name          = string
         description   = string
         defined_tags  = optional(map(string))
         freeform_tags = optional(map(string))
-        tag_defaults     = optional(map(object({
-            tag_ocid = string,
-            default_value = string,
-            is_user_required = optional(bool)
-          })))
-        children      = optional(map(object({
+        tag_defaults = optional(map(object({
+          tag_ocid         = string,
+          default_value    = string,
+          is_user_required = optional(bool)
+        })))
+        children = optional(map(object({
           name          = string
           description   = string
           defined_tags  = optional(map(string))
           freeform_tags = optional(map(string))
-          tag_defaults     = optional(map(object({
-            tag_ocid = string,
-            default_value = string,
+          tag_defaults = optional(map(object({
+            tag_ocid         = string,
+            default_value    = string,
             is_user_required = optional(bool)
           })))
-          children      = optional(map(object({
+          children = optional(map(object({
             name          = string
             description   = string
             defined_tags  = optional(map(string))
             freeform_tags = optional(map(string))
-            tag_defaults     = optional(map(object({
-              tag_ocid = string,
-              default_value = string,
+            tag_defaults = optional(map(object({
+              tag_ocid         = string,
+              default_value    = string,
               is_user_required = optional(bool)
             })))
-            children      = optional(map(object({
+            children = optional(map(object({
               name          = string
               description   = string
               defined_tags  = optional(map(string))
               freeform_tags = optional(map(string))
-              tag_defaults     = optional(map(object({
-                tag_ocid = string,
-                default_value = string,
+              tag_defaults = optional(map(object({
+                tag_ocid         = string,
+                default_value    = string,
                 is_user_required = optional(bool)
               })))
-              children      = optional(map(object({
+              children = optional(map(object({
                 name          = string
                 description   = string
                 defined_tags  = optional(map(string))
                 freeform_tags = optional(map(string))
-                tag_defaults     = optional(map(object({
-                  tag_ocid = string,
-                  default_value = string,
+                tag_defaults = optional(map(object({
+                  tag_ocid         = string,
+                  default_value    = string,
                   is_user_required = optional(bool)
                 })))
-              })))  
+              })))
             })))
           })))
         })))
-      })))  
+      })))
     }))
   })
 }
 
-variable "groups" {
-  description = "The groups."
-  type = map(object({
-    name          = string,
-    description   = string,
-    members       = list(string),
-    defined_tags  = map(string),
-    freeform_tags = map(string)
-  }))
+variable "groups_configuration" {
+  description = "The groups configuration."
+  type = object({
+    default_defined_tags  = optional(map(string)),
+    default_freeform_tags = optional(map(string))
+    groups = map(object({
+      name          = string,
+      description   = string,
+      members       = optional(list(string)),
+      defined_tags  = optional(map(string)),
+      freeform_tags = optional(map(string))
+    }))
+  })
 }
 
 variable "policies_configuration" {
   description = "Policies configuration"
   type = object({
-    enable_cis_benchmark_checks = optional(bool) # Whether to check policies for CIS Foundations Benchmark recommendations. Default is true.
-    enable_tenancy_level_template_policies = optional(bool) # Enables the module to manage template (pre-configured) policies at the root compartment) (a.k.a tenancy) level. Attribute groups_with_tenancy_level_roles only applies if this is set to true. Default is false.
+    enable_cis_benchmark_checks            = optional(bool)  # Whether to check policies for CIS Foundations Benchmark recommendations. Default is true.
+    enable_tenancy_level_template_policies = optional(bool)  # Enables the module to manage template (pre-configured) policies at the root compartment) (a.k.a tenancy) level. Attribute groups_with_tenancy_level_roles only applies if this is set to true. Default is false.
     groups_with_tenancy_level_roles = optional(list(object({ # A list of group names and their roles at the root compartment (a.k.a tenancy) level. Pre-configured policies are assigned to each group in the root compartment. Only applicable if attribute enable_tenancy_level_template_policies is set to true.
-      name = string
+      name  = string
       roles = string
     })))
-    enable_compartment_level_template_policies = optional(bool) # Enables the module to manage template (pre-configured) policies at the compartment level (compartments other than root). Default is true.
-    cislz_tag_lookup_value = optional(string) # The tag value used for looking up compartments. This module searches for compartments that are freeform tagged with cislz = <cislz_tag_lookup_value>. The selected compartments are eligible for template (pre-configured) policies. If the lookup fails, no template policies are applied.
-    policy_name_prefix = optional(string) # A prefix to be prepended to all policy names
-    policy_name_suffix = optional(string) # A suffix to be appended to all policy names
-    supplied_compartments = optional(list(object({ # List of compartments that are policy targets. This is a workaround to Terraform behavior. Please see note below.
-      name = string
-      ocid = string
+    enable_compartment_level_template_policies = optional(bool)   # Enables the module to manage template (pre-configured) policies at the compartment level (compartments other than root). Default is true.
+    cislz_tag_lookup_value                     = optional(string) # The tag value used for looking up compartments. This module searches for compartments that are freeform tagged with cislz = <cislz_tag_lookup_value>. The selected compartments are eligible for template (pre-configured) policies. If the lookup fails, no template policies are applied.
+    policy_name_prefix                         = optional(string) # A prefix to be prepended to all policy names
+    policy_name_suffix                         = optional(string) # A suffix to be appended to all policy names
+    supplied_compartments = optional(list(object({                # List of compartments that are policy targets. This is a workaround to Terraform behavior. Please see note below.
+      name          = string
+      ocid          = string
       freeform_tags = map(string)
     })))
-    defined_tags = optional(map(string)) # Any defined tags to apply on the template (pre-configured) policies.
-    freeform_tags = optional(map(string)) # Any freeform tags to apply on the template (pre-configured) policies.
+    defined_tags  = optional(map(string))     # Any defined tags to apply on the template (pre-configured) policies.
+    freeform_tags = optional(map(string))     # Any freeform tags to apply on the template (pre-configured) policies.
     supplied_policies = optional(map(object({ # A map of directly supplied policies. Use this to suplement the template (pre-configured) policies. For completely overriding the template policies, set attributes enable_compartment_level_template_policies and enable_tenancy_level_template_policies to false.
       name             = string
       description      = string
@@ -126,7 +130,7 @@ variable "policies_configuration" {
       freeform_tags    = map(string)
     })))
     enable_output = optional(bool) # Whether the module generates output. Default is false.
-    enable_debug = optional(bool) # # Whether the module generates debug output. Default is false.
+    enable_debug  = optional(bool) # # Whether the module generates debug output. Default is false.
   })
 }
 
