@@ -309,7 +309,7 @@ locals {
                 network_firewall_policy_key = nfw_value.network_firewall_policy_key
               }
             } : {} : {} : null
-            network_firewall_policies = netconfig_value.non_vcn_specific_gateways.network_firewalls_configuration != null ? netconfig_value.non_vcn_specific_gateways.network_firewalls_configuration.network_firewalls_configuration != null ? length(netconfig_value.non_vcn_specific_gateways.network_firewalls_configuration.network_firewalls_configuration) > 0 ? {
+            network_firewall_policies = netconfig_value.non_vcn_specific_gateways.network_firewalls_configuration != null ? netconfig_value.non_vcn_specific_gateways.network_firewalls_configuration.network_firewall_policies != null ? length(netconfig_value.non_vcn_specific_gateways.network_firewalls_configuration.network_firewall_policies) > 0 ? {
               for nfwp_key, nfwp_value in netconfig_value.non_vcn_specific_gateways.network_firewalls_configuration.network_firewall_policies : nfwp_key => {
                 compartment_id      = nfwp_value.compartment_id != null ? nfwp_value.compartment_id : nfwp_value.compartment_key != null ? local.compartments[nfwp_value.compartment_key].id : null
                 defined_tags        = nfwp_value.defined_tags
