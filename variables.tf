@@ -143,6 +143,7 @@ variable "enable_compartments_delete" {
 variable "network_configuration" {
   type = object({
     default_compartment_id     = optional(string),
+    default_compartment_key    = string,
     default_defined_tags       = optional(map(string)),
     default_freeform_tags      = optional(map(string)),
     default_enable_cis_checks  = optional(bool),
@@ -150,14 +151,16 @@ variable "network_configuration" {
 
     network_configuration_categories = optional(map(object({
       category_compartment_id     = optional(string),
+      category_compartment_key    = optional(string),
       category_defined_tags       = optional(map(string)),
       category_freeform_tags      = optional(map(string)),
       category_enable_cis_checks  = optional(bool),
       category_ssh_ports_to_check = optional(list(number)),
 
       vcns = optional(map(object({
-        compartment_id = optional(string),
-        display_name   = optional(string),
+        compartment_id  = optional(string),
+        compartment_key = optional(string),
+        display_name    = optional(string),
         byoipv6cidr_details = optional(map(object({
           byoipv6range_id = string
           ipv6cidr_block  = string
@@ -174,10 +177,11 @@ variable "network_configuration" {
         freeform_tags                    = optional(map(string)),
 
         security_lists = optional(map(object({
-          compartment_id = optional(string),
-          defined_tags   = optional(map(string)),
-          freeform_tags  = optional(map(string)),
-          display_name   = optional(string),
+          compartment_id  = optional(string),
+          compartment_key = optional(string),
+          defined_tags    = optional(map(string)),
+          freeform_tags   = optional(map(string)),
+          display_name    = optional(string),
           ingress_rules = optional(list(object({
             stateless    = optional(bool),
             protocol     = string,
@@ -207,10 +211,11 @@ variable "network_configuration" {
         })))
 
         route_tables = optional(map(object({
-          compartment_id = optional(string),
-          defined_tags   = optional(map(string)),
-          freeform_tags  = optional(map(string)),
-          display_name   = optional(string),
+          compartment_id  = optional(string),
+          compartment_key = optional(string),
+          defined_tags    = optional(map(string)),
+          freeform_tags   = optional(map(string)),
+          display_name    = optional(string),
           route_rules = optional(map(object({
             network_entity_id  = optional(string),
             network_entity_key = optional(string),
@@ -222,6 +227,7 @@ variable "network_configuration" {
 
         dhcp_options = optional(map(object({
           compartment_id   = optional(string),
+          compartment_key  = optional(string),
           display_name     = optional(string),
           defined_tags     = optional(map(string)),
           freeform_tags    = optional(map(string)),
@@ -235,8 +241,9 @@ variable "network_configuration" {
         })))
 
         subnets = optional(map(object({
-          cidr_block     = string,
-          compartment_id = optional(string),
+          cidr_block      = string,
+          compartment_id  = optional(string),
+          compartment_key = optional(string),
           #Optional
           availability_domain        = optional(string),
           defined_tags               = optional(map(string)),
@@ -253,10 +260,11 @@ variable "network_configuration" {
         })))
 
         network_security_groups = optional(map(object({
-          compartment_id = optional(string),
-          display_name   = optional(string),
-          defined_tags   = optional(map(string))
-          freeform_tags  = optional(map(string))
+          compartment_id  = optional(string),
+          compartment_key = optional(string),
+          display_name    = optional(string),
+          defined_tags    = optional(map(string))
+          freeform_tags   = optional(map(string))
           ingress_rules = optional(map(object({
             description  = optional(string),
             protocol     = string,
@@ -288,6 +296,7 @@ variable "network_configuration" {
         vcn_specific_gateways = optional(object({
           internet_gateways = optional(map(object({
             compartment_id  = optional(string),
+            compartment_key  = optional(string),
             enabled         = optional(bool),
             defined_tags    = optional(map(string)),
             display_name    = optional(string),
@@ -297,6 +306,7 @@ variable "network_configuration" {
 
           nat_gateways = optional(map(object({
             compartment_id  = optional(string),
+            compartment_key  = optional(string),
             block_traffic   = optional(bool),
             defined_tags    = optional(map(string)),
             display_name    = optional(string),
@@ -307,6 +317,7 @@ variable "network_configuration" {
 
           service_gateways = optional(map(object({
             compartment_id  = optional(string),
+            compartment_key  = optional(string),
             defined_tags    = optional(map(string)),
             display_name    = optional(string),
             freeform_tags   = optional(map(string)),
@@ -315,6 +326,7 @@ variable "network_configuration" {
 
           local_peering_gateways = optional(map(object({
             compartment_id  = optional(string),
+            compartment_key  = optional(string),
             defined_tags    = optional(map(string)),
             display_name    = optional(string),
             freeform_tags   = optional(map(string)),
@@ -330,10 +342,11 @@ variable "network_configuration" {
         vcn_id = string,
 
         security_lists = optional(map(object({
-          compartment_id = optional(string),
-          defined_tags   = optional(map(string)),
-          freeform_tags  = optional(map(string)),
-          display_name   = optional(string),
+          compartment_id  = optional(string),
+          compartment_key = optional(string),
+          defined_tags    = optional(map(string)),
+          freeform_tags   = optional(map(string)),
+          display_name    = optional(string),
           ingress_rules = optional(list(object({
             stateless    = optional(bool),
             protocol     = string,
@@ -363,10 +376,11 @@ variable "network_configuration" {
         })))
 
         route_tables = optional(map(object({
-          compartment_id = optional(string),
-          defined_tags   = optional(map(string)),
-          freeform_tags  = optional(map(string)),
-          display_name   = optional(string),
+          compartment_id  = optional(string),
+          compartment_key = optional(string),
+          defined_tags    = optional(map(string)),
+          freeform_tags   = optional(map(string)),
+          display_name    = optional(string),
           route_rules = optional(map(object({
             network_entity_id  = optional(string),
             network_entity_key = optional(string),
@@ -391,8 +405,9 @@ variable "network_configuration" {
         })))
 
         subnets = optional(map(object({
-          cidr_block     = string,
-          compartment_id = optional(string),
+          cidr_block      = string,
+          compartment_id  = optional(string),
+          compartment_key = optional(string),
           #Optional
           availability_domain        = optional(string),
           defined_tags               = optional(map(string)),
@@ -412,10 +427,11 @@ variable "network_configuration" {
         })))
 
         network_security_groups = optional(map(object({
-          compartment_id = optional(string),
-          display_name   = optional(string),
-          defined_tags   = optional(map(string))
-          freeform_tags  = optional(map(string))
+          compartment_id  = optional(string),
+          compartment_key = optional(string),
+          display_name    = optional(string),
+          defined_tags    = optional(map(string))
+          freeform_tags   = optional(map(string))
           ingress_rules = optional(map(object({
             description  = optional(string),
             protocol     = string,
@@ -447,6 +463,7 @@ variable "network_configuration" {
         vcn_specific_gateways = optional(object({
           internet_gateways = optional(map(object({
             compartment_id  = optional(string),
+            compartment_key  = optional(string),
             enabled         = optional(bool),
             defined_tags    = optional(map(string)),
             display_name    = optional(string),
@@ -457,6 +474,7 @@ variable "network_configuration" {
 
           nat_gateways = optional(map(object({
             compartment_id  = optional(string),
+            compartment_key  = optional(string),
             block_traffic   = optional(bool),
             defined_tags    = optional(map(string)),
             display_name    = optional(string),
@@ -468,6 +486,7 @@ variable "network_configuration" {
 
           service_gateways = optional(map(object({
             compartment_id  = optional(string),
+            compartment_key  = optional(string),
             defined_tags    = optional(map(string)),
             display_name    = optional(string),
             freeform_tags   = optional(map(string)),
@@ -477,6 +496,7 @@ variable "network_configuration" {
 
           local_peering_gateways = optional(map(object({
             compartment_id  = optional(string),
+            compartment_key  = optional(string),
             defined_tags    = optional(map(string)),
             display_name    = optional(string),
             freeform_tags   = optional(map(string)),
@@ -491,10 +511,11 @@ variable "network_configuration" {
       non_vcn_specific_gateways = optional(object({
 
         dynamic_routing_gateways = optional(map(object({
-          compartment_id = optional(string),
-          defined_tags   = optional(map(string)),
-          display_name   = optional(string),
-          freeform_tags  = optional(map(string)),
+          compartment_id  = optional(string),
+          compartment_key = optional(string),
+          defined_tags    = optional(map(string)),
+          display_name    = optional(string),
+          freeform_tags   = optional(map(string)),
 
           remote_peering_connections = optional(map(object({
             compartment_id   = optional(string),
@@ -631,10 +652,11 @@ variable "network_configuration" {
           }))),
 
           network_firewall_policies = optional(map(object({
-            compartment_id = optional(string),
-            defined_tags   = optional(map(string)),
-            display_name   = optional(string),
-            freeform_tags  = optional(map(string)),
+            compartment_id  = optional(string),
+            compartment_key = optional(string),
+            defined_tags    = optional(map(string)),
+            display_name    = optional(string),
+            freeform_tags   = optional(map(string)),
             application_lists = optional(map(object({
               application_list_name = string,
               application_values = map(object({
