@@ -143,7 +143,7 @@ variable "enable_compartments_delete" {
 variable "network_configuration" {
   type = object({
     default_compartment_id     = optional(string),
-    default_compartment_key    = string,
+    default_compartment_key    = optional(string),
     default_defined_tags       = optional(map(string)),
     default_freeform_tags      = optional(map(string)),
     default_enable_cis_checks  = optional(bool),
@@ -296,7 +296,7 @@ variable "network_configuration" {
         vcn_specific_gateways = optional(object({
           internet_gateways = optional(map(object({
             compartment_id  = optional(string),
-            compartment_key  = optional(string),
+            compartment_key = optional(string),
             enabled         = optional(bool),
             defined_tags    = optional(map(string)),
             display_name    = optional(string),
@@ -306,7 +306,7 @@ variable "network_configuration" {
 
           nat_gateways = optional(map(object({
             compartment_id  = optional(string),
-            compartment_key  = optional(string),
+            compartment_key = optional(string),
             block_traffic   = optional(bool),
             defined_tags    = optional(map(string)),
             display_name    = optional(string),
@@ -317,7 +317,7 @@ variable "network_configuration" {
 
           service_gateways = optional(map(object({
             compartment_id  = optional(string),
-            compartment_key  = optional(string),
+            compartment_key = optional(string),
             defined_tags    = optional(map(string)),
             display_name    = optional(string),
             freeform_tags   = optional(map(string)),
@@ -326,7 +326,7 @@ variable "network_configuration" {
 
           local_peering_gateways = optional(map(object({
             compartment_id  = optional(string),
-            compartment_key  = optional(string),
+            compartment_key = optional(string),
             defined_tags    = optional(map(string)),
             display_name    = optional(string),
             freeform_tags   = optional(map(string)),
@@ -392,6 +392,7 @@ variable "network_configuration" {
 
         dhcp_options = optional(map(object({
           compartment_id   = optional(string),
+          compartment_key  = optional(string),
           display_name     = optional(string),
           defined_tags     = optional(map(string)),
           freeform_tags    = optional(map(string)),
@@ -463,7 +464,7 @@ variable "network_configuration" {
         vcn_specific_gateways = optional(object({
           internet_gateways = optional(map(object({
             compartment_id  = optional(string),
-            compartment_key  = optional(string),
+            compartment_key = optional(string),
             enabled         = optional(bool),
             defined_tags    = optional(map(string)),
             display_name    = optional(string),
@@ -474,7 +475,7 @@ variable "network_configuration" {
 
           nat_gateways = optional(map(object({
             compartment_id  = optional(string),
-            compartment_key  = optional(string),
+            compartment_key = optional(string),
             block_traffic   = optional(bool),
             defined_tags    = optional(map(string)),
             display_name    = optional(string),
@@ -486,7 +487,7 @@ variable "network_configuration" {
 
           service_gateways = optional(map(object({
             compartment_id  = optional(string),
-            compartment_key  = optional(string),
+            compartment_key = optional(string),
             defined_tags    = optional(map(string)),
             display_name    = optional(string),
             freeform_tags   = optional(map(string)),
@@ -496,7 +497,7 @@ variable "network_configuration" {
 
           local_peering_gateways = optional(map(object({
             compartment_id  = optional(string),
-            compartment_key  = optional(string),
+            compartment_key = optional(string),
             defined_tags    = optional(map(string)),
             display_name    = optional(string),
             freeform_tags   = optional(map(string)),
@@ -519,6 +520,7 @@ variable "network_configuration" {
 
           remote_peering_connections = optional(map(object({
             compartment_id   = optional(string),
+            compartment_key  = optional(string),
             defined_tags     = optional(map(string)),
             display_name     = optional(string),
             freeform_tags    = optional(map(string)),
@@ -544,11 +546,12 @@ variable "network_configuration" {
           })))
 
           drg_route_tables = optional(map(object({
-            defined_tags                     = optional(map(string)),
-            display_name                     = optional(string),
-            freeform_tags                    = optional(map(string)),
-            import_drg_route_distribution_id = optional(string),
-            is_ecmp_enabled                  = optional(bool),
+            defined_tags                      = optional(map(string)),
+            display_name                      = optional(string),
+            freeform_tags                     = optional(map(string)),
+            import_drg_route_distribution_id  = optional(string),
+            import_drg_route_distribution_key = optional(string),
+            is_ecmp_enabled                   = optional(bool),
             route_rules = optional(map(object({
               destination                 = string,
               destination_type            = string,
@@ -579,6 +582,7 @@ variable "network_configuration" {
 
           remote_peering_connections = optional(map(object({
             compartment_id   = optional(string),
+            compartment_key  = optional(string),
             defined_tags     = optional(map(string)),
             display_name     = optional(string),
             freeform_tags    = optional(map(string)),
@@ -604,11 +608,12 @@ variable "network_configuration" {
           })))
 
           drg_route_tables = optional(map(object({
-            defined_tags                     = optional(map(string)),
-            display_name                     = optional(string),
-            freeform_tags                    = optional(map(string)),
-            import_drg_route_distribution_id = optional(string),
-            is_ecmp_enabled                  = optional(bool),
+            defined_tags                      = optional(map(string)),
+            display_name                      = optional(string),
+            freeform_tags                     = optional(map(string)),
+            import_drg_route_distribution_id  = optional(string),
+            import_drg_route_distribution_key = optional(string),
+            is_ecmp_enabled                   = optional(bool),
             route_rules = optional(map(object({
               destination                 = string,
               destination_type            = string,
@@ -638,6 +643,7 @@ variable "network_configuration" {
           network_firewalls = optional(map(object({
             availability_domain         = optional(number),
             compartment_id              = optional(string),
+            compartment_key             = optional(string),
             defined_tags                = optional(map(string)),
             display_name                = optional(string),
             freeform_tags               = optional(map(string)),
