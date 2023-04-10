@@ -1,0 +1,217 @@
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.data.oci_core_services.oci_services: Reading...[0m[0m
+[0m[1mmodule.cislz_policies.data.oci_identity_compartments.all: Reading...[0m[0m
+[0m[1mmodule.cislz_groups.data.oci_identity_users.these: Reading...[0m[0m
+[0m[1mmodule.cislz_groups.oci_identity_group.these["ESBLZ-TEST-GROUP"]: Refreshing state... [id=ocid1.group.oc1..aaaaaaaaqzfs7wvab6df5hxkpnh6oi7ngj225mkefxy724q76qijedfuecga][0m
+[0m[1mmodule.cislz_compartments.oci_identity_compartment.these["L1-LANDING-ZONE-HOME-KEY"]: Refreshing state... [id=ocid1.compartment.oc1..aaaaaaaaqbo5zvdtfr4kcmwlze5xkyl326dva3jwp5sjdfsp6jntygl3lp7q][0m
+[0m[1mmodule.cislz_compartments.oci_identity_compartment.level_2["L2-NON-PROD-KEY"]: Refreshing state... [id=ocid1.compartment.oc1..aaaaaaaa2l742awwairci6iewqryve6vm4u2v6awt3w44sl6t7yjxdvx4cbq][0m
+[0m[1mmodule.cislz_compartments.oci_identity_compartment.level_2["L2-PRODUCTION-KEY"]: Refreshing state... [id=ocid1.compartment.oc1..aaaaaaaatg3azt67orboa2ycuxjx24isvumsjriyrfpepgxqqtslauljkqhq][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.data.oci_core_services.oci_services: Read complete after 1s [id=CoreServicesDataSource-0][0m
+[0m[1mmodule.cislz_compartments.oci_identity_compartment.level_3["L3-PRODUCTION-SHARED-KEY"]: Refreshing state... [id=ocid1.compartment.oc1..aaaaaaaaz5jxpis2a3o7y5ars6trls46z257a2pzne4pckzzqbefaumknu4q][0m
+[0m[1mmodule.cislz_compartments.oci_identity_compartment.level_3["L3-NON-PROD-LOGGING-KEY"]: Refreshing state... [id=ocid1.compartment.oc1..aaaaaaaaa7ntyxmay4nho4m3wcujmfr3ihsgbb3dd4npwkdynngcl7jnzhsq][0m
+[0m[1mmodule.cislz_compartments.oci_identity_compartment.level_3["L3-PRODUCTION-WORKLOAD01-KEY"]: Refreshing state... [id=ocid1.compartment.oc1..aaaaaaaaelkm64hof6bxb7mglfpca7qb5wl7rxr2iesyn4elpqduxh7n3rja][0m
+[0m[1mmodule.cislz_compartments.oci_identity_compartment.level_3["L3-NON-PROD-SHARED-KEY"]: Refreshing state... [id=ocid1.compartment.oc1..aaaaaaaa62pr2cqnqx5s5kchee3dib2biwc2rooansznmfqnvfwcdnazzcpq][0m
+[0m[1mmodule.cislz_compartments.oci_identity_compartment.level_3["L3-NON-PROD-WORKLOAD01-KEY"]: Refreshing state... [id=ocid1.compartment.oc1..aaaaaaaay5rukni7ycari7hj7cjzsr3jsni325ldcupomqsuylile4ev4kwq][0m
+[0m[1mmodule.cislz_compartments.oci_identity_compartment.level_3["L3-PRODUCTION-LOGGING-KEY"]: Refreshing state... [id=ocid1.compartment.oc1..aaaaaaaadufjay3firscbiegxwe24spen6lawzotin7sqxjw7mnso7fhgmsq][0m
+[0m[1mmodule.cislz_compartments.oci_identity_compartment.level_3["L3-NON-PROD-BACKUP-KEY"]: Refreshing state... [id=ocid1.compartment.oc1..aaaaaaaal4uh5wmvws6pozrvmpyv4bkwaxgz5vdfaswjxabsvghdqfayoq4q][0m
+[0m[1mmodule.cislz_compartments.oci_identity_compartment.level_3["L3-PRODUCTION-BACKUP-KEY"]: Refreshing state... [id=ocid1.compartment.oc1..aaaaaaaaiuvgw4upvkflip25p6zlxxblbizoin6slpi2fnlfyhi3p4dlqxka][0m
+[0m[1mmodule.cislz_compartments.oci_identity_compartment.level_4["L4-PRODUCTION-SHARED-SECURITY-KEY"]: Refreshing state... [id=ocid1.compartment.oc1..aaaaaaaadw47auy5fs2iacknwfmc4gnqs2jty7nxdv5h66ukwaendcp3m5vq][0m
+[0m[1mmodule.cislz_compartments.oci_identity_compartment.level_4["L4-PRODUCTION-SHARED-NETWORK-KEY"]: Refreshing state... [id=ocid1.compartment.oc1..aaaaaaaagcv3iipbs4gdz2ej6qx6dbkvwwxpy6bs6x2r465w7p524hck5esq][0m
+[0m[1mmodule.cislz_compartments.oci_identity_compartment.level_4["L4-NON-PROD-SHARED-SECURITY-KEY"]: Refreshing state... [id=ocid1.compartment.oc1..aaaaaaaasqgl5oz4ras66r3qd5g7mnsmrilbugjm6gwxhtlavah3ed5zsbja][0m
+[0m[1mmodule.cislz_compartments.oci_identity_compartment.level_4["L4-NON-PROD-SHARED-NETWORK-KEY"]: Refreshing state... [id=ocid1.compartment.oc1..aaaaaaaa2jhwzieca7dhmqgbwg35hjkutdz4b6ugcn5gv4bn5ziybpn4cyta][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_drg.these["NON-PROD-DRG-01-KEY"]: Refreshing state... [id=ocid1.drg.oc1.eu-frankfurt-1.aaaaaaaadngutsqcrx2bk2m4jnikyohcnv64zmjnaijhmr4bykqel5kh3l7q][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_drg.these["PROD-DRG-01-KEY"]: Refreshing state... [id=ocid1.drg.oc1.eu-frankfurt-1.aaaaaaaakqsth75dswgqtnrwhgepwo7t6bkzjpyobsa6tqnlmaeyhxrwpm3q][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_vcn.these["PROD-HUB-VCN-KEY"]: Refreshing state... [id=ocid1.vcn.oc1.eu-frankfurt-1.amaaaaaattkvkkia5ltruve47ufnw4tb4x5jfmljrpuvyszzcksyn6dakrka][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_vcn.these["PROD-SPOKE-WORKLOAD01-VCN-KEY"]: Refreshing state... [id=ocid1.vcn.oc1.eu-frankfurt-1.amaaaaaattkvkkiabx3bcx4pxarprhbdp3li6lmbplu76grx2z2m2lmx5tha][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_vcn.these["NON-PROD-HUB-VCN-KEY"]: Refreshing state... [id=ocid1.vcn.oc1.eu-frankfurt-1.amaaaaaattkvkkiarp2wcmyygj42cws6rcsdri7f2kbdn23rixtjpc2tc5ga][0m
+[0m[1mmodule.cislz_groups.data.oci_identity_users.these: Read complete after 2s [id=IdentityUsersDataSource-2176573680][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.data.oci_core_route_tables.these_default_route_tables_new_vcns["NON-PROD-HUB-VCN-KEY"]: Reading...[0m[0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.data.oci_core_route_tables.these_default_route_tables_new_vcns["PROD-SPOKE-WORKLOAD01-VCN-KEY"]: Reading...[0m[0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.data.oci_core_route_tables.these_default_route_tables_new_vcns["PROD-HUB-VCN-KEY"]: Reading...[0m[0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_security_list.these["SECLIST-NON-PROD-PRIVATE-KEY"]: Refreshing state... [id=ocid1.securitylist.oc1.eu-frankfurt-1.aaaaaaaaucqywyk7jkfdvwy663l4ixxkiehdyqg3f25ote7l2epjzsyolwda][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_security_list.these["SECLIST-PROD-PRIVATE-KEY"]: Refreshing state... [id=ocid1.securitylist.oc1.eu-frankfurt-1.aaaaaaaa4fxulewvizjqm5ycuk3rjsyzpkooopo2qirxkhhhnlvivgqkuzzq][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_security_list.these["SECLIST-PROD-SPOKE-WORKLOAD01-DB-KEY"]: Refreshing state... [id=ocid1.securitylist.oc1.eu-frankfurt-1.aaaaaaaa6j4v5z5h63nahkqcpvk5pnx4vpp6mty3cpfidlcscm6xolytumvq][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_security_list.these["SECLIST-PROD-PUBLIC-KEY"]: Refreshing state... [id=ocid1.securitylist.oc1.eu-frankfurt-1.aaaaaaaaxva3lwyawcnisuq5gdnk3yxgbfbghuckihkfvvek4brdclzbfdya][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_security_list.these["SECLIST-NON-PROD-PUBLIC-KEY"]: Refreshing state... [id=ocid1.securitylist.oc1.eu-frankfurt-1.aaaaaaaaaesjhyiqwgt5gqsx2f6mldlof35dp55hj6zm7iddfbhm6bdqpptq][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_security_list.these["SECLIST-PROD-SPOKE-WORKLOAD01-APP-KEY"]: Refreshing state... [id=ocid1.securitylist.oc1.eu-frankfurt-1.aaaaaaaascje7p736xceimlpfkygbgyuf23r3rtgjkx4cipyujmil5wfp62q][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.data.oci_core_route_tables.these_default_route_tables_new_vcns["NON-PROD-HUB-VCN-KEY"]: Read complete after 0s [id=CoreRouteTablesDataSource-326096695][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_security_list.these["SECLIST-PROD-SPOKE-WORKLOAD01-WEB-KEY"]: Refreshing state... [id=ocid1.securitylist.oc1.eu-frankfurt-1.aaaaaaaahqjpapg3kfo3fwbby6qnrorcwe2ianpmneum2wkvvbxl4kux4eua][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.data.oci_core_route_tables.these_default_route_tables_new_vcns["PROD-SPOKE-WORKLOAD01-VCN-KEY"]: Read complete after 0s [id=CoreRouteTablesDataSource-3435329562][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group.these["NSG-PROD-SPOKE-WORKLOAD01-DB-KEY"]: Refreshing state... [id=ocid1.networksecuritygroup.oc1.eu-frankfurt-1.aaaaaaaaky6vf6v25sigatsqi2nekfafh7wki44lex7gjfzvtabupcj3gsmq][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group.these["NSG-PROD-SPOKE-WORKLOAD01-WEB-KEY"]: Refreshing state... [id=ocid1.networksecuritygroup.oc1.eu-frankfurt-1.aaaaaaaagafnt27l25yjcqaccrvfwii642kjj2t7zfzsmupzo6b6rzikf35q][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.data.oci_core_route_tables.these_default_route_tables_new_vcns["PROD-HUB-VCN-KEY"]: Read complete after 0s [id=CoreRouteTablesDataSource-1782476916][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group.these["NSG-NON-PROD-PRIVATE-KEY"]: Refreshing state... [id=ocid1.networksecuritygroup.oc1.eu-frankfurt-1.aaaaaaaa65m6yt7rqqswahqohsa3iq5y3a3tr3uijdxgp2wg25quxrsvxasq][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group.these["NSG-NON-PROD-PUBLIC-KEY"]: Refreshing state... [id=ocid1.networksecuritygroup.oc1.eu-frankfurt-1.aaaaaaaagzr5akv3ky6jlhhdzhjn4movxgglkwbjkhdznycrnybddfwuvbtq][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group.these["NSG-PROD-PRIVATE-KEY"]: Refreshing state... [id=ocid1.networksecuritygroup.oc1.eu-frankfurt-1.aaaaaaaasapntf3idrzywwrjgdn5mghesph3lan4rjwf2vmpel4guuvvfg7a][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group.these["NSG-PROD-PUBLIC-KEY"]: Refreshing state... [id=ocid1.networksecuritygroup.oc1.eu-frankfurt-1.aaaaaaaam4mrmnlmjyhupfdbi2dbmyjnbesp3p5dt255kbmvovnmgo2gctpa][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group.these["NSG-PROD-SPOKE-WORKLOAD01-APP-KEY"]: Refreshing state... [id=ocid1.networksecuritygroup.oc1.eu-frankfurt-1.aaaaaaaar6d7kniw3ezjqoacr6xbkzgxky2ihx3mznjbabifgc2z3qv7vcka][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_remote_peering_connection.oci_acceptor_remote_peering_connections["RPC-01-PROD"]: Refreshing state... [id=ocid1.remotepeeringconnection.oc1.eu-frankfurt-1.aaaaaaaazftuunuqwjc7nishmrwyko34lse4a5dhhboqedsgwosb3lfbubga][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_subnet.these["NON-PROD-PRIVATE-SUBNET-KEY"]: Refreshing state... [id=ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaav63arp4j6safngqr7enm4resxafuxu3kpyxncibpvgfzm4ugd3rq][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_subnet.these["NON-PROD-PUBLIC-SUBNET-KEY"]: Refreshing state... [id=ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaa3tjecgskxl4ttoxbnwfxwqugndksdpyslhkupwtodat5gtghz6wq][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_subnet.these["PROD-PRIVATE-SUBNET-KEY"]: Refreshing state... [id=ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaai2djdwpdf2w7xvrcxltuqdfbd76ekja4knwnr5sigibxnig556ja][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_subnet.these["PROD-SPOKE-WORKLOAD01-WEB-SUBNET-KEY"]: Refreshing state... [id=ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaa42bnvo7xetabw4kyc3vgtexsoem56lmkiujufw4randapa7ril6q][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_subnet.these["PROD-SPOKE-WORKLOAD01-DB-SUBNET-KEY"]: Refreshing state... [id=ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaaywwpzvrh4omziis2l5ohim2yzb23ttnl4c3l2zhwa245uyj3konq][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_subnet.these["PROD-PUBLIC-SUBNET-KEY"]: Refreshing state... [id=ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaauqjmk5jksb6pm7ejtzerd22d3mawskntvkpw4cl3rzhqpyh4b64q][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_subnet.these["PROD-SPOKE-WORKLOAD01-APP-SUBNET-KEY"]: Refreshing state... [id=ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaaif5o7zgta37nx2tuukrza4qbajernpv2z4lznlboewrgmogqfnkq][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_remote_peering_connection.oci_requestor_remote_peering_connections["RPC-01-NON-PROD"]: Refreshing state... [id=ocid1.remotepeeringconnection.oc1.eu-frankfurt-1.aaaaaaaakmcxdg55cutaeayupcvzkbvofnnf64pwgklijlra37x4zbtb7eiq][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group_security_rule.egress["NSG-PROD-SPOKE-WORKLOAD01-WEB-KEY.anywhere"]: Refreshing state... [id=CAFE56][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group_security_rule.egress["NSG-PROD-SPOKE-WORKLOAD01-APP-KEY.anywhere"]: Refreshing state... [id=FB1060][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group_security_rule.egress["NSG-PROD-SPOKE-WORKLOAD01-DB-KEY.anywhere"]: Refreshing state... [id=7431C4][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group_security_rule.egress["NSG-PROD-PUBLIC-KEY.anywhere"]: Refreshing state... [id=EBFFCD][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group_security_rule.egress["NSG-NON-PROD-PRIVATE-KEY.anywhere"]: Refreshing state... [id=9035DD][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group_security_rule.egress["NSG-NON-PROD-PUBLIC-KEY.anywhere"]: Refreshing state... [id=156AE7][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group_security_rule.egress["NSG-PROD-PRIVATE-KEY.anywhere"]: Refreshing state... [id=B1C850][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group_security_rule.ingress["NSG-PROD-SPOKE-WORKLOAD01-APP-KEY.ssh_22"]: Refreshing state... [id=3F1673][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group_security_rule.ingress["NSG-PROD-SPOKE-WORKLOAD01-DB-KEY.ssh_22"]: Refreshing state... [id=0A6D4C][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group_security_rule.ingress["NSG-PROD-SPOKE-WORKLOAD01-APP-KEY.http_80"]: Refreshing state... [id=3F4805][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group_security_rule.ingress["NSG-PROD-PUBLIC-KEY.ssh_22"]: Refreshing state... [id=F05864][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group_security_rule.ingress["NSG-PROD-SPOKE-WORKLOAD01-DB-KEY.jdbc_1521"]: Refreshing state... [id=04BCBF][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group_security_rule.ingress["NSG-PROD-SPOKE-WORKLOAD01-WEB-KEY.ssh_22"]: Refreshing state... [id=9F8FF7][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group_security_rule.ingress["NSG-PROD-PRIVATE-KEY.http_80"]: Refreshing state... [id=07DE97][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group_security_rule.ingress["NSG-NON-PROD-PUBLIC-KEY.ssh_22"]: Refreshing state... [id=B81794][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group_security_rule.ingress["NSG-PROD-PRIVATE-KEY.ssh_22"]: Refreshing state... [id=1B03D4][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group_security_rule.ingress["NSG-NON-PROD-PUBLIC-KEY.http_443"]: Refreshing state... [id=54AD68][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group_security_rule.ingress["NSG-PROD-PUBLIC-KEY.http_443"]: Refreshing state... [id=0D19A7][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group_security_rule.ingress["NSG-PROD-SPOKE-WORKLOAD01-WEB-KEY.http_443"]: Refreshing state... [id=A6B2E1][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group_security_rule.ingress["NSG-NON-PROD-PRIVATE-KEY.http_80"]: Refreshing state... [id=6A4D56][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_network_security_group_security_rule.ingress["NSG-NON-PROD-PRIVATE-KEY.ssh_22"]: Refreshing state... [id=FD66CE][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_internet_gateway.these["NON-PROD-IGW-KEY"]: Refreshing state... [id=ocid1.internetgateway.oc1.eu-frankfurt-1.aaaaaaaacau4vavwh46346pg2l5zz4gdky3uua6lgfxoy3y3ngyich54hxgq][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_internet_gateway.these["PROD-IGW-KEY"]: Refreshing state... [id=ocid1.internetgateway.oc1.eu-frankfurt-1.aaaaaaaae4rd6fjhmxjfko7b4n3vwb3k4zmlwwd5d7hl2v5avngvfezwlmrq][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_service_gateway.these["SPOKE-WORKLOAD01-SGW-KEY"]: Refreshing state... [id=ocid1.servicegateway.oc1.eu-frankfurt-1.aaaaaaaagei4ptlz26jnlcxqekcvshdf4t6fnmkxkmvqf6nybtnhsviar5ga][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_service_gateway.these["NON-PROD-SGW-KEY"]: Refreshing state... [id=ocid1.servicegateway.oc1.eu-frankfurt-1.aaaaaaaaxycljokmse7wmijzinx2ya3zzaf2afbvjtko3n5wx7vufurfiwga][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_service_gateway.these["PROD-SGW-KEY"]: Refreshing state... [id=ocid1.servicegateway.oc1.eu-frankfurt-1.aaaaaaaan7d5q4itggifoidzipgc7lcqs6c5uhi6nkne563ck3gzhyfncfiq][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_nat_gateway.these["NON-PROD-NATGW-KEY"]: Refreshing state... [id=ocid1.natgateway.oc1.eu-frankfurt-1.aaaaaaaasgwjmsfuvnczsjhewyllefeqvap3jinpgxndt7gzu557ltd32hka][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_nat_gateway.these["PROD-NATGW-KEY"]: Refreshing state... [id=ocid1.natgateway.oc1.eu-frankfurt-1.aaaaaaaa75t2tyxk2nkizdr6pavx5whfxwse63qytavp7fdfu6slxz4xyqaa][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_nat_gateway.these["SPOKE-WORKLOAD01-NATGW-KEY"]: Refreshing state... [id=ocid1.natgateway.oc1.eu-frankfurt-1.aaaaaaaastf2hmlotfhnseloqvqr7ldwy5cc3zwvrgtaivtzci4ldscpcw2a][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_route_table.these_no_gw_attached["RT-01-SPOKE-WORKLOAD01-KEY"]: Refreshing state... [id=ocid1.routetable.oc1.eu-frankfurt-1.aaaaaaaake3spww57jk2p7dibcfnaewhyubnimu35y7yjsw6udpi37xxcmlq][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_route_table.these_no_gw_attached["RT-01-PROD-KEY"]: Refreshing state... [id=ocid1.routetable.oc1.eu-frankfurt-1.aaaaaaaayfnsjtnou3qxeqqednxcfh3hy3ou3fr2joyuvzddxgdxso6pbjnq][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_route_table.these_no_gw_attached["RT-01-NON-PROD-KEY"]: Refreshing state... [id=ocid1.routetable.oc1.eu-frankfurt-1.aaaaaaaaaqpdusnjubltdkjoywk7jpwj3a67n75pztyhogoog4o3eacl45qq][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_route_table.these_no_gw_attached["RT-02-PROD-KEY"]: Refreshing state... [id=ocid1.routetable.oc1.eu-frankfurt-1.aaaaaaaaowaf7pd6ow4rqlkjm7oxjrj4qap5np5oauzqrexsz2xubmidwg2a][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_route_table.these_no_gw_attached["RT-02-SPOKE-WORKLOAD01-KEY"]: Refreshing state... [id=ocid1.routetable.oc1.eu-frankfurt-1.aaaaaaaabuuqigjb6rkbsko5zcwgpxttmj5ff5f5idzk2dhulsygois5a23q][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_route_table.these_no_gw_attached["RT-02-NON-PROD-KEY"]: Refreshing state... [id=ocid1.routetable.oc1.eu-frankfurt-1.aaaaaaaamvfxpxb5vgro6bbv6pb7bka4lqdj5qo6wkixrylmbgndfpoewn2q][0m
+[0m[1mmodule.cislz_policies.data.oci_identity_compartments.all: Read complete after 4s [id=IdentityCompartmentsDataSource-678951756][0m
+
+Interrupt received.
+Please wait for Terraform to exit or data loss may occur.
+Gracefully shutting down...
+
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_route_table_attachment.these["PROD-SPOKE-WORKLOAD01-DB-SUBNET-KEY"]: Refreshing state... [id=ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaaywwpzvrh4omziis2l5ohim2yzb23ttnl4c3l2zhwa245uyj3konq/ocid1.routetable.oc1.eu-frankfurt-1.aaaaaaaabuuqigjb6rkbsko5zcwgpxttmj5ff5f5idzk2dhulsygois5a23q][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_route_table_attachment.these["NON-PROD-PRIVATE-SUBNET-KEY"]: Refreshing state... [id=ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaav63arp4j6safngqr7enm4resxafuxu3kpyxncibpvgfzm4ugd3rq/ocid1.routetable.oc1.eu-frankfurt-1.aaaaaaaamvfxpxb5vgro6bbv6pb7bka4lqdj5qo6wkixrylmbgndfpoewn2q][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_route_table_attachment.these["PROD-PRIVATE-SUBNET-KEY"]: Refreshing state... [id=ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaai2djdwpdf2w7xvrcxltuqdfbd76ekja4knwnr5sigibxnig556ja/ocid1.routetable.oc1.eu-frankfurt-1.aaaaaaaaowaf7pd6ow4rqlkjm7oxjrj4qap5np5oauzqrexsz2xubmidwg2a][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_route_table_attachment.these["PROD-SPOKE-WORKLOAD01-APP-SUBNET-KEY"]: Refreshing state... [id=ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaaif5o7zgta37nx2tuukrza4qbajernpv2z4lznlboewrgmogqfnkq/ocid1.routetable.oc1.eu-frankfurt-1.aaaaaaaabuuqigjb6rkbsko5zcwgpxttmj5ff5f5idzk2dhulsygois5a23q][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_route_table_attachment.these["PROD-PUBLIC-SUBNET-KEY"]: Refreshing state... [id=ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaauqjmk5jksb6pm7ejtzerd22d3mawskntvkpw4cl3rzhqpyh4b64q/ocid1.routetable.oc1.eu-frankfurt-1.aaaaaaaayfnsjtnou3qxeqqednxcfh3hy3ou3fr2joyuvzddxgdxso6pbjnq][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_route_table_attachment.these["NON-PROD-PUBLIC-SUBNET-KEY"]: Refreshing state... [id=ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaa3tjecgskxl4ttoxbnwfxwqugndksdpyslhkupwtodat5gtghz6wq/ocid1.routetable.oc1.eu-frankfurt-1.aaaaaaaaaqpdusnjubltdkjoywk7jpwj3a67n75pztyhogoog4o3eacl45qq][0m
+[0m[1mmodule.terraform-oci-cis-landing-zone-network.oci_core_route_table_attachment.these["PROD-SPOKE-WORKLOAD01-WEB-SUBNET-KEY"]: Refreshing state... [id=ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaa42bnvo7xetabw4kyc3vgtexsoem56lmkiujufw4randapa7ril6q/ocid1.routetable.oc1.eu-frankfurt-1.aaaaaaaake3spww57jk2p7dibcfnaewhyubnimu35y7yjsw6udpi37xxcmlq][0m
+[0m
+[1m[36mNote:[0m[1m Objects have changed outside of Terraform[0m
+
+[0mTerraform detected the following changes made outside of Terraform since the
+last "terraform apply" which may have affected this plan:
+
+[1m  # module.terraform-oci-cis-landing-zone-network.oci_core_remote_peering_connection.oci_acceptor_remote_peering_connections["RPC-01-PROD"][0m has changed[0m[0m
+[0m  [33m~[0m[0m resource "oci_core_remote_peering_connection" "oci_acceptor_remote_peering_connections" {
+        [1m[0mid[0m[0m                       = "ocid1.remotepeeringconnection.oc1.eu-frankfurt-1.aaaaaaaazftuunuqwjc7nishmrwyko34lse4a5dhhboqedsgwosb3lfbubga"
+      [32m+[0m [0m[1m[0mpeer_id[0m[0m                  = "ocid1.remotepeeringconnection.oc1.eu-frankfurt-1.aaaaaaaakmcxdg55cutaeayupcvzkbvofnnf64pwgklijlra37x4zbtb7eiq"
+      [32m+[0m [0m[1m[0mpeer_region_name[0m[0m         = "eu-frankfurt-1"
+      [32m+[0m [0m[1m[0mpeer_tenancy_id[0m[0m          = "ocid1.tenancy.oc1..aaaaaaaaxzpxbcag7zgamh2erlggqro3y63tvm2rbkkjz4z2zskvagupiz7a"
+      [33m~[0m [0m[1m[0mpeering_status[0m[0m           = "NEW" [33m->[0m [0m"PEERED"
+        [90m# (8 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # module.terraform-oci-cis-landing-zone-network.oci_core_subnet.these["PROD-SPOKE-WORKLOAD01-APP-SUBNET-KEY"][0m has changed[0m[0m
+[0m  [33m~[0m[0m resource "oci_core_subnet" "these" {
+        [1m[0mid[0m[0m                         = "ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaaif5o7zgta37nx2tuukrza4qbajernpv2z4lznlboewrgmogqfnkq"
+      [33m~[0m [0m[1m[0mstate[0m[0m                      = "UPDATING" [33m->[0m [0m"AVAILABLE"
+        [90m# (17 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # module.terraform-oci-cis-landing-zone-network.oci_core_subnet.these["PROD-SPOKE-WORKLOAD01-DB-SUBNET-KEY"][0m has changed[0m[0m
+[0m  [33m~[0m[0m resource "oci_core_subnet" "these" {
+        [1m[0mid[0m[0m                         = "ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaaywwpzvrh4omziis2l5ohim2yzb23ttnl4c3l2zhwa245uyj3konq"
+      [33m~[0m [0m[1m[0mstate[0m[0m                      = "UPDATING" [33m->[0m [0m"AVAILABLE"
+        [90m# (17 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # module.terraform-oci-cis-landing-zone-network.oci_core_subnet.these["PROD-SPOKE-WORKLOAD01-WEB-SUBNET-KEY"][0m has changed[0m[0m
+[0m  [33m~[0m[0m resource "oci_core_subnet" "these" {
+        [1m[0mid[0m[0m                         = "ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaa42bnvo7xetabw4kyc3vgtexsoem56lmkiujufw4randapa7ril6q"
+      [33m~[0m [0m[1m[0mstate[0m[0m                      = "UPDATING" [33m->[0m [0m"AVAILABLE"
+        [90m# (17 unchanged attributes hidden)[0m[0m
+    }
+
+
+Unless you have made equivalent changes to your configuration, or ignored the
+relevant attributes using ignore_changes, the following plan may include
+actions to undo or respond to these changes.
+[90m
+─────────────────────────────────────────────────────────────────────────────[0m
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [33m~[0m update in-place
+[0m
+Terraform will perform the following actions:
+
+[1m  # module.terraform-oci-cis-landing-zone-network.oci_core_remote_peering_connection.oci_requestor_remote_peering_connections["RPC-01-NON-PROD"][0m will be updated in-place[0m[0m
+[0m  [33m~[0m[0m resource "oci_core_remote_peering_connection" "oci_requestor_remote_peering_connections" {
+      [33m~[0m [0m[1m[0mdefined_tags[0m[0m             = {
+          [31m-[0m [0m"CCA_Basic_Tag.email" = "oracleidentitycloudservice/cosmin.tudor@oracle.com" [90m->[0m [0m[90mnull[0m[0m
+        }
+        [1m[0mid[0m[0m                       = "ocid1.remotepeeringconnection.oc1.eu-frankfurt-1.aaaaaaaakmcxdg55cutaeayupcvzkbvofnnf64pwgklijlra37x4zbtb7eiq"
+        [90m# (11 unchanged attributes hidden)[0m[0m
+    }
+
+[0m[1mPlan:[0m 0 to add, 1 to change, 0 to destroy.
+[0m[0m
+[1mChanges to Outputs:[0m[0m
+  [33m~[0m [0m[1m[0mprovisioned_networking_resources[0m[0m = {
+      [33m~[0m [0mremote_peering_connections                     = {
+          [33m~[0m [0mRPC-01-NON-PROD = {
+              [33m~[0m [0mdefined_tags                   = {
+                  [31m-[0m [0m"CCA_Basic_Tag.email" = "oracleidentitycloudservice/cosmin.tudor@oracle.com" [90m->[0m [0m[90mnull[0m[0m
+                }
+                id                             = "ocid1.remotepeeringconnection.oc1.eu-frankfurt-1.aaaaaaaakmcxdg55cutaeayupcvzkbvofnnf64pwgklijlra37x4zbtb7eiq"
+                [90m# (18 unchanged elements hidden)[0m[0m
+            }
+          [33m~[0m [0mRPC-01-PROD     = {
+                id                             = "ocid1.remotepeeringconnection.oc1.eu-frankfurt-1.aaaaaaaazftuunuqwjc7nishmrwyko34lse4a5dhhboqedsgwosb3lfbubga"
+              [33m~[0m [0mpeer_id                        = [90mnull[0m[0m [33m->[0m [0m"ocid1.remotepeeringconnection.oc1.eu-frankfurt-1.aaaaaaaakmcxdg55cutaeayupcvzkbvofnnf64pwgklijlra37x4zbtb7eiq"
+              [33m~[0m [0mpeer_key                       = "NOT PEERED OR PARTNER RPC CREATED OUTSIDE THIS AUTOMATION" [33m->[0m [0m"RPC-01-NON-PROD"
+              [33m~[0m [0mpeer_name                      = "NOT PEERED OR PARTNER RPC CREATED OUTSIDE THIS AUTOMATION" [33m->[0m [0m"RPC-01-NON-PROD"
+              [33m~[0m [0mpeer_region_name               = [90mnull[0m[0m [33m->[0m [0m"eu-frankfurt-1"
+              [33m~[0m [0mpeer_tenancy_id                = [90mnull[0m[0m [33m->[0m [0m"ocid1.tenancy.oc1..aaaaaaaaxzpxbcag7zgamh2erlggqro3y63tvm2rbkkjz4z2zskvagupiz7a"
+              [33m~[0m [0mpeering_status                 = "NEW" [33m->[0m [0m"PEERED"
+                [90m# (13 unchanged elements hidden)[0m[0m
+            }
+        }
+      [33m~[0m [0msubnets                                        = {
+          [33m~[0m [0mPROD-SPOKE-WORKLOAD01-APP-SUBNET-KEY = {
+                id                             = "ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaaif5o7zgta37nx2tuukrza4qbajernpv2z4lznlboewrgmogqfnkq"
+              [33m~[0m [0mstate                          = "UPDATING" [33m->[0m [0m"AVAILABLE"
+                [90m# (29 unchanged elements hidden)[0m[0m
+            }
+          [33m~[0m [0mPROD-SPOKE-WORKLOAD01-DB-SUBNET-KEY  = {
+                id                             = "ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaaywwpzvrh4omziis2l5ohim2yzb23ttnl4c3l2zhwa245uyj3konq"
+              [33m~[0m [0mstate                          = "UPDATING" [33m->[0m [0m"AVAILABLE"
+                [90m# (29 unchanged elements hidden)[0m[0m
+            }
+          [33m~[0m [0mPROD-SPOKE-WORKLOAD01-WEB-SUBNET-KEY = {
+                id                             = "ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaa42bnvo7xetabw4kyc3vgtexsoem56lmkiujufw4randapa7ril6q"
+              [33m~[0m [0mstate                          = "UPDATING" [33m->[0m [0m"AVAILABLE"
+                [90m# (29 unchanged elements hidden)[0m[0m
+            }
+            [90m# (4 unchanged elements hidden)[0m[0m
+        }
+        [90m# (20 unchanged elements hidden)[0m[0m
+    }
+[33m╷[0m[0m
+[33m│[0m [0m[1m[33mWarning: [0m[0m[1mExperimental feature "module_variable_optional_attrs" is active[0m
+[33m│[0m [0m
+[33m│[0m [0m[0m  on provider.tf line 20, in terraform:
+[33m│[0m [0m  20:   experiments = [[4mmodule_variable_optional_attrs[0m][0m
+[33m│[0m [0m
+[33m│[0m [0mExperimental features are subject to breaking changes in future minor or patch releases, based on feedback.
+[33m│[0m [0m
+[33m│[0m [0mIf you have feedback on the design of this feature, please open a GitHub issue to discuss it.
+[33m│[0m [0m
+[33m│[0m [0m(and 4 more similar warnings elsewhere)
+[33m╵[0m[0m

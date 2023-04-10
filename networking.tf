@@ -86,6 +86,7 @@ locals {
                 freeform_tags  = nsg_value.freeform_tags
                 ingress_rules  = nsg_value.ingress_rules
                 egress_rules   = nsg_value.egress_rules
+                display_name   = nsg_value.display_name
               }
             } : {} : {}
             vcn_specific_gateways = {
