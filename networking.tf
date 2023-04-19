@@ -2,7 +2,7 @@
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
 
 locals {
-  network_configuration = {
+  network_configuration = var.network_configuration != null ? length(var.network_configuration) > 0 ? {
     default_compartment_id     = var.network_configuration.default_compartment_id != null ? var.network_configuration.default_compartment_id : var.network_configuration.default_compartment_key != null ? local.compartments[var.network_configuration.default_compartment_key].id : null
     default_defined_tags       = var.network_configuration.default_defined_tags
     default_freeform_tags      = var.network_configuration.default_freeform_tags
@@ -329,7 +329,7 @@ locals {
         } : null
       }
     } : null : null
-  }
+  } : null : null
 }
 
 module "terraform-oci-cis-landing-zone-network" {
