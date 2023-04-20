@@ -26,8 +26,6 @@ locals {
             is_oracle_gua_allocation_enabled = vcn_value.is_oracle_gua_allocation_enabled
             cidr_blocks                      = vcn_value.cidr_blocks
             dns_label                        = vcn_value.dns_label
-            is_create_igw                    = vcn_value.is_create_igw
-            is_attach_drg                    = vcn_value.is_attach_drg
             block_nat_traffic                = vcn_value.block_nat_traffic
             defined_tags                     = vcn_value.defined_tags
             freeform_tags                    = vcn_value.freeform_tags
@@ -333,6 +331,6 @@ locals {
 }
 
 module "terraform-oci-cis-landing-zone-network" {
-  source                = "git@github.com:oracle-quickstart/terraform-oci-cis-landing-zone-networking.git?ref=v0.5.1"
+  source                = "git@github.com:oracle-quickstart/terraform-oci-cis-landing-zone-networking.git?ref=v0.5.2"
   network_configuration = local.network_configuration
 }
