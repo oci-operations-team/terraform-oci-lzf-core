@@ -14,8 +14,11 @@ variable "home_region" {}
 variable "compartments_configuration" {
   description = "The compartments configuration. Use the compartments attribute to define your topology. OCI supports compartment hierarchies up to six levels."
   type = object({
-    default_parent_ocid = string         # the default parent for all top (first level) compartments. Use parent_ocid attribute to specify different parents.
-    enable_delete       = optional(bool) # whether or not compartments are physically deleted when destroyed. Default is false.
+    default_parent_ocid   = string                # the default parent for all top (first level) compartments. Use parent_ocid attribute to specify different parents.
+    enable_delete         = optional(bool)        # whether or not compartments are physically deleted when destroyed. Default is false.
+    default_defined_tags  = optional(map(string)) # applies to all compartments, unless overriden by defined_tags in a compartment object
+    default_freeform_tags = optional(map(string)) # applies to all compartments, unless overriden by freeform_tags in a compartment object
+    enable_delete         = optional(bool)        # whether or not compartments are physically deleted when destroyed. Default is false.
     compartments = map(object({
       name          = string
       description   = string
@@ -101,6 +104,21 @@ variable "groups_configuration" {
   })
 }
 
+variable "dynamic_groups_configuration" {
+  description = "The dynamic groups."
+  type = object({
+    default_defined_tags  = optional(map(string)),
+    default_freeform_tags = optional(map(string))
+    dynamic_groups = map(object({
+      name          = string,
+      description   = string,
+      matching_rule = string
+      defined_tags  = optional(map(string)),
+      freeform_tags = optional(map(string))
+    }))
+  })
+}
+
 variable "policies_configuration" {
   description = "Policies configuration"
   type = object({
@@ -111,10 +129,9 @@ variable "policies_configuration" {
       roles = string
     })))
     enable_compartment_level_template_policies = optional(bool)   # Enables the module to manage template (pre-configured) policies at the compartment level (compartments other than root). Default is true.
-    cislz_tag_lookup_value                     = optional(string) # The tag value used for looking up compartments. This module searches for compartments that are freeform tagged with cislz = <cislz_tag_lookup_value>. The selected compartments are eligible for template (pre-configured) policies. If the lookup fails, no template policies are applied.
     policy_name_prefix                         = optional(string) # A prefix to be prepended to all policy names
     policy_name_suffix                         = optional(string) # A suffix to be appended to all policy names
-    supplied_compartments = optional(list(object({                # List of compartments that are policy targets. This is a workaround to Terraform behavior. Please see note below.
+    supplied_compartments = optional(map(object({                 # List of compartments that are policy targets. This is a workaround to Terraform behavior. Please see note below.
       name          = string
       ocid          = string
       freeform_tags = map(string)
@@ -126,18 +143,12 @@ variable "policies_configuration" {
       description      = string
       compartment_ocid = string
       statements       = list(string)
-      defined_tags     = map(string)
-      freeform_tags    = map(string)
+      defined_tags     = optional(map(string))
+      freeform_tags    = optional(map(string))
     })))
     enable_output = optional(bool) # Whether the module generates output. Default is false.
     enable_debug  = optional(bool) # # Whether the module generates debug output. Default is false.
   })
-}
-
-variable "enable_compartments_delete" {
-  description = "Whether compartments are physically deleted upon destroy."
-  type        = bool
-  default     = true
 }
 
 variable "network_configuration" {

@@ -14,6 +14,11 @@ output "groups" {
   value       = module.cislz_groups.groups
 }
 
+output "dynamic_groups" {
+  description = "The groups."
+  value       = module.cislz_dynamic_groups.dynamic_groups
+}
+
 output "memberships" {
   description = "The memberships."
   value       = module.cislz_groups.memberships
@@ -22,14 +27,6 @@ output "memberships" {
 output "provisioned_networking_resources" {
   description = "Provisioned networking resources"
   value       = module.terraform-oci-cis-landing-zone-network.provisioned_networking_resources
-}
-
-output "map_of_compartments_tagged_with_cislz_tag_lookup_value" {
-  value = module.cislz_policies.map_of_compartments_tagged_with_cislz_tag_lookup_value
-}
-
-output "list_of_compartments_types_tagged_with_cislz_tag_lookup_value" {
-  value = module.cislz_policies.list_of_compartments_types_tagged_with_cislz_tag_lookup_value
 }
 
 output "policies" {
