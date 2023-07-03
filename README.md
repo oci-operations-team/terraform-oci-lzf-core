@@ -1,21 +1,21 @@
 # OCI Open LZ - Operating Entities Landing Zone (Open LZ) Core Terraform Module
 
 # 1. Introduction
-This Terraform module provides a generic and configurable way to implement Operating Entity Landing Zones (OELZ) with the following characteristics:
+This Terraform module provides a generic and configurable way to implement the OCI Open LZ with the following characteristics:
 
-**Shared Operating Model**: The OELZ will have a central team responsible to create the core landing zone resources, known as shared services, and onboard Operating Entities (OE). An OE is an abstraction of an internal organization unit, an Operating Company (OpCo), a subsidiary, or even an LoB. In the OELZ there will be several OEs, and each OE will have the autonomy to operate (create and change) their resources on top of standard pre-defined structures.
+**Shared Operating Model**: The OCI Open LZ will have a central team responsible to create the core landing zone resources, known as shared services, and onboard Operating Entities (OE). An OE is an abstraction of an internal organization unit, an Operating Company (OpCo), a subsidiary, or even an LoB. In the OCI Open LZ  there will be several OEs, and each OE will have the autonomy to operate (create and change) their resources on top of standard pre-defined structures.
 
-**Segregation of Duties**: The OELZ organization has enterprise segregation of resources at the OE level. An OE can onboard different OE departments, which will be responsible for their resources, organized by projects. Projects can have environments and can contain multiple workloads. All layers can be isolated in terms of identity and access management.
+**Segregation of Duties**: The OCI Open LZ  organization has enterprise segregation of resources at the OE level. An OE can onboard different OE departments, which will be responsible for their resources, organized by projects. Projects can have environments and can contain multiple workloads. All layers can be isolated in terms of identity and access management.
 
-**Isolation Resources**:  The isolation of resources is supported by the segregation of duties, and at the network level. The network structure is organized by OE, into environments (production and non-production) and resources in those environments are isolated at the project level, where each project layer has its own security posture. 
+**Isolation Resources**:  The isolation of resources is supported by the segregation of duties at the network level. The network structure is organized by OE, into environments (production and non-production) and resources in those environments are isolated at the project level, where each project layer has its own security posture. 
 
 # 2. Solution
 
 ## 2.1 Getting Started
 
-To make this work, the minimim you'll need will be to define 3 different types of tfvars (in JSON or regular tf format):
+To make this work, the minimum you'll need will be to define 3 different types of tfvars (in JSON or regular tf format):
 
-1) An OCI credentials tfvar to setup the provider authentication to provision the resources. For additional information check the point `2.6 Inputs`, in this document.   
+1) An OCI credentials tfvar to setup the provider authentication to provision the resources. For additional information check the section `2.6 Inputs`, in this document.   
 
     ```
     "fingerprint": "<PEM key fingerprint>",
@@ -27,9 +27,9 @@ To make this work, the minimim you'll need will be to define 3 different types o
     "private_key_password": "<private key pwd>"
     ```
 
-2)  A tfvar containing the tenancy compartment structure for the OE, the recommended separation of duties with dedicated compartments for security and networking teams, and security groups and policies. Have a look to the point `2.6 Inputs` to know more about the expected structure and arguments. You CAN tailor this structure in your OE.
+2)  A tfvar containing the tenancy compartment structure for the OE, the recommended separation of duties with dedicated compartments for security and networking teams, and security groups and policies. Look at section `2.6 Inputs` to know more about the expected structure and arguments. You CAN tailor this structure in your OE.
    
-3) A tfvar container the networking elements for your OE. This is based on the Hub & Spoke topology to enable new OEs to work as Spokes and being attached to the Hub in the Landing Zone. You can customize your VCNs with subnets, route tables, SLs, NSGs as you want. Have a look to the point `2.6 Inputs` to know more about the expected format.
+3) A tfvar container for the networking elements for your OE. This is based on the Hub & Spoke topology to enable new OEs to work as Spokes and be attached to the Hub in the Landing Zone. You can customize your VCNs with subnets, route tables, SLs, NSGs as you want. Look at the section `2.6 Inputs` to know more about the expected format.
 
 ## 2.2 Requirements
 
@@ -54,7 +54,7 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_compartments"></a> [compartments](#input\_compartments) | The compartments structure, given as a map of objects nested up to 6 levels. | <pre>map(object({<br>    name          = string<br>    description   = string<br>    parent_id     = string<br>    defined_tags  = map(string)<br>    freeform_tags = map(string)<br>    children = map(object({<br>      name          = string<br>      description   = string<br>      defined_tags  = map(string)<br>      freeform_tags = map(string)<br>      children = map(object({<br>        name          = string<br>        description   = string<br>        defined_tags  = map(string)<br>        freeform_tags = map(string)<br>        children = map(object({<br>          name          = string<br>          description   = string<br>          defined_tags  = map(string)<br>          freeform_tags = map(string)<br>          children = map(object({<br>            name          = string<br>            description   = string<br>            defined_tags  = map(string)<br>            freeform_tags = map(string)<br>            children = map(object({<br>              name          = string<br>              description   = string<br>              defined_tags  = map(string)<br>              freeform_tags = map(string)<br>            }))<br>          }))<br>        }))<br>      }))<br>    }))<br>  }))</pre> | `{}` | no |
+| <a name="input_compartments"></a> [compartments](#input\_compartments) | The compartment's structure, given as a map of objects nested up to 6 levels. | <pre>map(object({<br>    name          = string<br>    description   = string<br>    parent_id     = string<br>    defined_tags  = map(string)<br>    freeform_tags = map(string)<br>    children = map(object({<br>      name          = string<br>      description   = string<br>      defined_tags  = map(string)<br>      freeform_tags = map(string)<br>      children = map(object({<br>        name          = string<br>        description   = string<br>        defined_tags  = map(string)<br>        freeform_tags = map(string)<br>        children = map(object({<br>          name          = string<br>          description   = string<br>          defined_tags  = map(string)<br>          freeform_tags = map(string)<br>          children = map(object({<br>            name          = string<br>            description   = string<br>            defined_tags  = map(string)<br>            freeform_tags = map(string)<br>            children = map(object({<br>              name          = string<br>              description   = string<br>              defined_tags  = map(string)<br>              freeform_tags = map(string)<br>            }))<br>          }))<br>        }))<br>      }))<br>    }))<br>  }))</pre> | `{}` | no |
 | <a name="input_enable_compartments_delete"></a> [enable\_compartments\_delete](#input\_enable\_compartments\_delete) | Whether compartments are physically deleted upon destroy. | `bool` | `true` | no |
 | <a name="input_fingerprint"></a> [fingerprint](#input\_fingerprint) | n/a | `any` | n/a | yes |
 | <a name="input_home_region"></a> [home\_region](#input\_home\_region) | n/a | `any` | n/a | yes |
