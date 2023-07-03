@@ -1,4 +1,4 @@
-# Oracle Cloud Infrastructure (OCI) Operating Entities Landing Zone (OELZ) Core Terraform Module
+# OCI Open LZ - Operating Entities Landing Zone (Open LZ) Core Terraform Module
 
 # 1. Introduction
 This Terraform module provides a generic and configurable way to implement Operating Entity Landing Zones (OELZ) with the following characteristics:
