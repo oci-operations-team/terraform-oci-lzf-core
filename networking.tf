@@ -246,6 +246,32 @@ locals {
             } : null
           }
         } : {} : {}
+
+        IPs = netconfig_value.IPs != null ? length(netconfig_value.IPs) > 0 ? {
+
+          public_ips_pools = netconfig_value.IPs.public_ips_pools != null ? length(netconfig_value.IPs.public_ips_pools) > 0 ? {
+            for pip_key, pip_value in netconfig_value.IPs.public_ips_pools : pip_key => {
+              compartment_id = pip_value.compartment_id != null ? pip_value.compartment_id : pip_value.compartment_key != null ? local.compartments[pip_value.compartment_key].id : null
+              defined_tags   = pip_value.defined_tags
+              display_name   = pip_value.display_name
+              freeform_tags  = pip_value.freeform_tags
+            }
+          } : {} : {}
+
+          public_ips = netconfig_value.IPs.public_ips != null ? length(netconfig_value.IPs.public_ips) > 0 ? {
+            for pi_key, pi_value in netconfig_value.IPs.public_ips : pi_key => {
+              compartment_id     = pi_value.compartment_id != null ? pi_value.compartment_id : pi_value.compartment_key != null ? local.compartments[pi_value.compartment_key].id : null
+              lifetime           = pi_value.lifetime
+              defined_tags       = pi_value.defined_tags
+              display_name       = pi_value.display_name
+              freeform_tags      = pi_value.freeform_tags
+              private_ip_id      = pi_value.private_ip_id
+              public_ip_pool_id  = pi_value.public_ip_pool_id
+              public_ip_pool_key = pi_value.public_ip_pool_key
+            }
+          } : {} : {}
+        } : {} : {}
+
         non_vcn_specific_gateways = netconfig_value.non_vcn_specific_gateways != null ? {
           dynamic_routing_gateways = netconfig_value.non_vcn_specific_gateways.dynamic_routing_gateways != null ? length(netconfig_value.non_vcn_specific_gateways.dynamic_routing_gateways) > 0 ? {
             for drg_key, drg_value in netconfig_value.non_vcn_specific_gateways.dynamic_routing_gateways : drg_key => {
@@ -324,6 +350,32 @@ locals {
               }
             } : null : null : null
           }
+          l7_load_balancers = netconfig_value.non_vcn_specific_gateways.l7_load_balancers != null ? length(netconfig_value.non_vcn_specific_gateways.l7_load_balancers) > 0 ? {
+            for l7_lbaas_key, l7_lbaas_value in netconfig_value.non_vcn_specific_gateways.l7_load_balancers : l7_lbaas_key => {
+              compartment_id              = l7_lbaas_value.compartment_id != null ? l7_lbaas_value.compartment_id : l7_lbaas_value.compartment_key != null ? local.compartments[l7_lbaas_value.compartment_key].id : null
+              display_name                = l7_lbaas_value.display_name
+              shape                       = l7_lbaas_value.shape
+              subnet_ids                  = l7_lbaas_value.subnet_ids
+              subnet_keys                 = l7_lbaas_value.subnet_keys
+              defined_tags                = l7_lbaas_value.defined_tags
+              freeform_tags               = l7_lbaas_value.freeform_tags
+              ip_mode                     = l7_lbaas_value.ip_mode
+              is_private                  = l7_lbaas_value.is_private
+              network_security_group_ids  = l7_lbaas_value.network_security_group_ids
+              network_security_group_keys = l7_lbaas_value.network_security_group_keys
+              reserved_ips_ids            = l7_lbaas_value.reserved_ips_ids
+              reserved_ips_keys           = l7_lbaas_value.reserved_ips_keys
+              shape_details               = l7_lbaas_value.shape_details
+              backend_sets                = l7_lbaas_value.backend_sets
+              cipher_suites               = l7_lbaas_value.cipher_suites
+              path_route_sets             = l7_lbaas_value.path_route_sets
+              host_names                  = l7_lbaas_value.host_names
+              routing_policies            = l7_lbaas_value.routing_policies
+              rule_sets                   = l7_lbaas_value.rule_sets
+              certificates                = l7_lbaas_value.certificates
+              listeners                   = l7_lbaas_value.listeners
+            }
+          } : {} : {}
         } : null
       }
     } : null : null
@@ -331,6 +383,6 @@ locals {
 }
 
 module "terraform-oci-cis-landing-zone-network" {
-  source                = "git@github.com:oracle-quickstart/terraform-oci-cis-landing-zone-networking.git?ref=v0.5.2"
+  source                = "git@github.com:oracle-quickstart/terraform-oci-cis-landing-zone-networking.git?ref=v0.5.3"
   network_configuration = local.network_configuration
 }
